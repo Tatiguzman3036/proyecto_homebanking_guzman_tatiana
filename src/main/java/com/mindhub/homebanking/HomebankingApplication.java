@@ -21,8 +21,11 @@ public class  HomebankingApplication {
 	public CommandLineRunner initData (ClientRepository clientRepository){
 		return args -> {
 			Client client1 = new Client("tatiana", "guzman", "djflnfdkl@gmail.com" );
+			Client client2 = new Client("tati", "guzm", "dkl@gmail.com" );
 			clientRepository.save(client1);
+			clientRepository.save(client2);
 			System.out.println(client1);
+			System.out.println(client2);
 		};
 
 	}

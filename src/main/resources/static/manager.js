@@ -28,14 +28,16 @@ const app = createApp ({
             .catch(error => console.log(error))
         },
         addClient (){
-            if(this.clientData === true){
+            if(this.clientData.firstName != "" && this.clientData.lastName != "" && this.clientData.email != ""){
                 this.postClient()
+            }else {
+                alert("It is necessary to complete all the fields...")
             }
             
         },
         
         postClient(){
-            axios.post("/clients", this.clientData)
+            axios.post("http://localhost:8080/clients", this.clientData)
             .then(response => {
                 this.loadData()
             })
