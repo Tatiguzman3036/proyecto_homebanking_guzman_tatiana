@@ -18,10 +18,11 @@ public class Client {
 
     public Client() {}
 
-    @Override //sobreescribo el metodo
+    @Override
     public String toString() {
         return "Client{" +
-                "firstName='" + firstName + '\'' +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
                 '}';
@@ -47,6 +48,10 @@ public class Client {
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
+    }
+
+    public long getId() {
+        return id;
     }
 
     public String getLastName() {
