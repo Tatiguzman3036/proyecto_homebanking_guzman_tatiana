@@ -24,10 +24,10 @@ public class  HomebankingApplication {
 		return args -> {
 			Client melba = new Client("Melba", "Morel", "melba@mindhub.com" );
 			Client tatiana = new Client("Tatiana", "Guzman", "tatiguzmn@hotmail.com");
-			Account VIN001 = new Account("VIN001", LocalDate.now(), 5000);
-			Account VIN002 = new Account("VIN002", LocalDate.now().plusDays(1),7500);
-			Account VIN003 = new Account("VIN003", LocalDate.now().plusDays(3), 15000);
-			Account VIN004 = new Account("VIN004", LocalDate.now(), 80000);
+			Account VIN001 = new Account("VIN001", LocalDate.now(), 5000.00);
+			Account VIN002 = new Account("VIN002", LocalDate.now().plusDays(1),7500.00);
+			Account VIN003 = new Account("VIN003", LocalDate.now().plusDays(3), 15000.00);
+			Account VIN004 = new Account("VIN004", LocalDate.now(), 80000.00);
 			melba.addAccount(VIN001);
 			melba.addAccount(VIN002);
 			tatiana.addAccount(VIN003);

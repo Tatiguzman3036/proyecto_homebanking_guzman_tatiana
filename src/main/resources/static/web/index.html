@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Manager|Home</title>
+    <link rel="shortcut icon" href="./images/la-guzmi.png" type="image/x-icon">
+    <link rel="stylesheet" href="./state/style.css">
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+</head>
+<body id="app" >
+  <div class="d-flex  flex-wrap align-items-center justify-content-center text-white">
+    <div class="container-form d-flex flex-wrap justify-content-around sign-up ">
+      <div class=" d-flex align-items-center text-center">
+        <div class="message">
+          <h2>Welcome To "La Guzmi"</h2>
+          <p>If you have an account, sign in here...</p>
+          <button class="sign-up-btn">Sign Up</button>
+        </div>
+      </div>
+      <form class="formulario">
+        <h2 class="create-account">Create an account</h2>
+        <div class="iconos d-flex justify-content-around">
+          <div class="border-icon d-flex align-items-center justify-content-center">
+            <i class='bx bxl-instagram'></i>
+          </div>
+          <div class="border-icon d-flex align-items-center justify-content-center">
+            <i class='bx bxl-linkedin'></i>
+          </div>
+          <div class="border-icon d-flex align-items-center justify-content-center">
+            <i class='bx bxl-facebook-circle'></i>
+          </div>
+        </div>
+        <p class="cuenta-gratis">Create a free account</p>
+        <input class="d-block text-center" type="text" placeholder="First Name">
+        <input class="d-block text-center" type="text" placeholder="Last Name">
+        <input class="d-block text-center" type="email" placeholder="email">
+        <input class="d-block text-center" type="password" placeholder="Password">
+        <input class="d-block text-center" type="button" value="Check in">
+      </form>
+    </div>
+    <div class="container-form d-flex flex-wrap justify-content-around sign-in" >
+      <form class="formulario">
+        <h2 class="create-account">Sign Up</h2>
+        <div class="iconos d-flex justify-content-around">
+          <div class="border-icon d-flex align-items-center justify-content-center">
+            <i class='bx bxl-instagram'></i>
+          </div>
+          <div class="border-icon d-flex align-items-center justify-content-center">
+            <i class='bx bxl-linkedin'></i>
+          </div>
+          <div class="border-icon d-flex align-items-center justify-content-center">
+            <i class='bx bxl-facebook-circle'></i>
+          </div>
+        </div>
+        <p class="cuenta-gratis">You don't have an account yet?</p>
+        <input class="d-block text-center" type="email" placeholder="email">
+        <input class="d-block text-center" type="password" placeholder="Password">
+          <a class="button-log-in" href="./state/accounts.html">Log in</a>
+      </form>
+      <div class=" d-flex align-items-center text-center">
+        <div class="message">
+          <h2>Welcome Back To "La Guzmi"</h2>
+          <p>If you don't have an account yet, sign up here...</p>
+          <button class="sign-in-btn" @click="toggleForms('signIn')">Sign Up</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="./js/home.js"></script>
+</body>
+</html>

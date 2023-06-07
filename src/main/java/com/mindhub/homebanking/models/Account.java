@@ -40,13 +40,6 @@ public class Account {
         this.balance = balance;
     }
 
-//    public Account(long id, String number, LocalDate creationDate, double balance) {
-//        this.id = id;
-//        this.number = number;
-//        this.creationDate = creationDate;
-//        this.balance = balance;
-//    }
-
     public long getId() {
         return id;
     }
