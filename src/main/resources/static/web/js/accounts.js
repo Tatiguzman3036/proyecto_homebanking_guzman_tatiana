@@ -12,7 +12,7 @@ const app = createApp({
     },
     methods:{
         loadData(){
-            axios.get("http://localhost:8080/api/clients/2")
+            axios.get("http://localhost:8080/api/clients/1")
             .then(res => {
                 this.client = res.data
                 console.log(this.client);

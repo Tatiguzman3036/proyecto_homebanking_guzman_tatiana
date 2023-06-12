@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account</title>
+    <link rel="stylesheet" href="../css/acount.css">
+    <link rel="shortcut icon" href="../images/la-guzmi.png" type="image/x-icon" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg bg-black m-2 rounded-2">
+          <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+              <img class="imagennavbar" src="../images/la-guzmi.png" alt="" />
+            </a>
+            <button class="navbar-toggler"type="button"data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0 gap-3 text-center">
+                <li class="nav-item">
+                  <a class="nav-link text-white active" aria-current="page" href="./home.html">Home</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link text-white" href="#">Accounts </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link disabled text-white">Customer Support</a>
+                </li>
+              </ul>
+              <form class="d-flex" role="search">
+                <input
+                  class="form-control me-2"
+                  type="search"
+                  placeholder="Search"
+                  aria-label="Search"
+                />
+                <button class="btn btn-outline-success" type="submit">
+                  Search
+                </button>
+              </form>
+            </div>
+          </div>
+        </nav>
+      </header>
+    <main id="app">
+        <div>
+            <h1 class="text-center text-bg-secondary ">Your account details:</h1>
+        </div>
+        <div class="d-flex justify-content-center pt-4">
+          <table>
+            <caption class="text-center te fs-3">Account Number:{{allAccount.number}} </caption>
+            <thead>
+              <tr>
+                <th>Type of Description</th>
+                <th>Amount</th>
+                <th>Description</th>
+                <th>Date</th>
+                <th>Time</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="account of transactions">
+                <td class="text-danger" v-if="account.type == `DEBIT`" >{{account.type}} </td>
+                <td class="text-success" v-else>{{account.type}} </td>
+                <td>{{account.amount}} </td>
+                <td >{{account.description}} </td>
+                <td>{{account.date.slice(0,10)}} </td>
+                <td>{{account.date.slice(11,19)}} </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+    </main>
+    
+    <footer class="bg-black m-2 rounded-2 text-center">
+        <h5 class="text-white">&copy Developed By : Tatiana Guzmán</h5>
+      </footer>
+      <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+      <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+      <script src="../js/account.js"></script>
+      <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+        crossorigin="anonymous"
+      ></script>
+</body>
+</html>

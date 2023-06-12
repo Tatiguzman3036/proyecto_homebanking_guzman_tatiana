@@ -1,0 +1,42 @@
+*{
+    padding: 0 !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+}
+body {
+    background-image: url(../images/54347.jpg) !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+}
+header {
+    min-height: 17vh !important;
+}
+main {
+    min-height: 73vh !important;
+}
+footer {
+    height: 10vh !important;
+}
+.imagennavbar {
+    height: 15vh !important;
+    width: 10vw !important;
+}
+table {
+    width: 90vw !important;
+}
+table, th, tr, td {
+    /* color: white; */
+    /* width: 65vw !important; */
+    border: 2px solid black !important;
+    border-collapse: collapse !important;
+    text-align: center !important;
+    border-radius: 10px !important;
+    background-color: beige;
+}
+caption {
+    padding: 0.3em;
+    /* color: #fff; */
+    background: #fff;
+    caption-side: top !important;
+}

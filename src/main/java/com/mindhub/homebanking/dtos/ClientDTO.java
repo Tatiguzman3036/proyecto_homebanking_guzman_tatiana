@@ -1,6 +1,7 @@
 package com.mindhub.homebanking.dtos;
 
 
+import com.mindhub.homebanking.models.Account;
 import com.mindhub.homebanking.models.Client;
 
 
@@ -15,7 +16,8 @@ public class ClientDTO {
     private String email;
     private Set<AccountDTO> accounts;
 
-    public ClientDTO(){};
+    public ClientDTO() {
+    }
 
     public ClientDTO(Client client) {
 
