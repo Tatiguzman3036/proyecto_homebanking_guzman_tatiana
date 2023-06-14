@@ -10,7 +10,6 @@ const app = createApp({
         }
     },
     created(){
-        
         let parametros = new URLSearchParams (location.search)
         this.id = parametros.get("id")
         axios.get(`http://localhost:8080/api/accounts/${this.id}`)

@@ -17,6 +17,7 @@ const app = createApp({
                 this.client = res.data
                 console.log(this.client);
                 this.account = res.data.accounts;
+                this.account.sort((itemA, itemB)=> itemA.id - itemB.id)
                 console.log(this.account);
 
             })

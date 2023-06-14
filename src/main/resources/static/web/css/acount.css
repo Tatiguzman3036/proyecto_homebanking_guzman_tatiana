@@ -13,10 +13,10 @@ header {
     min-height: 17vh !important;
 }
 main {
-    min-height: 73vh !important;
+    min-height: 74vh !important;
 }
 footer {
-    height: 10vh !important;
+    height: 5vh !important;
 }
 .imagennavbar {
     height: 15vh !important;
@@ -24,6 +24,7 @@ footer {
 }
 table {
     width: 90vw !important;
+    background-color: #00000066;
 }
 table, th, tr, td {
     /* color: white; */
@@ -36,7 +37,32 @@ table, th, tr, td {
 }
 caption {
     padding: 0.3em;
-    /* color: #fff; */
     background: #fff;
     caption-side: top !important;
+}
+.navbar {
+    background-color: #0f3c69!important;
+  }
+.buttom{
+    background-color: rgba(104, 68, 92, 0.959);
+    color: #fff;
+    font-size: 1.2rem !important;
+    border: 2px solid black;
+}
+.buttom:hover{
+    background-color: rgba(104, 68, 92, 0.959);
+    color: #fff;
+    font-size: 1.3rem !important;
+}
+.iamgenElse {
+    width: 5rem !important;
+    height: 5rem !important;
+}
+.text-velse{
+    background-color: #000000ad;
+    padding-top: 2rem !important;
+    border-radius: 10px !important;
+}
+.card {
+    background-color: #000000ad !important;
 }

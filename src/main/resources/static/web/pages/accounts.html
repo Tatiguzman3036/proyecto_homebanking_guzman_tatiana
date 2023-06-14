@@ -11,7 +11,7 @@
   </head>
   <body>
     <header>
-      <nav class="navbar navbar-expand-lg bg-black m-2 rounded-2">
+      <nav class="navbar navbar-expand-lg m-2 rounded-2">
         <div class="container-fluid">
           <a class="navbar-brand" href="#">
             <img class="imagennavbar" src="../images/la-guzmi.png" alt="" />
@@ -31,16 +31,6 @@
                 <a class="nav-link disabled text-white">Disabled</a>
               </li>
             </ul>
-            <form class="d-flex" role="search">
-              <input
-                class="form-control me-2"
-                type="search"
-                placeholder="Search"
-                aria-label="Search"
-              />
-              <button class="btn btn-outline-success" type="submit">
-                Search
-              </button>
             </form>
           </div>
         </div>
@@ -49,7 +39,7 @@
     <main id="app">
       <div class="d-flex flex-column align-items-center">
         <h5 class="text-white ya">
-          Welcome {{client.firstName}} {{client.lastName}} !
+          Welcome {{client.firstName}} {{client.lastName}}!
         </h5>
         <div class="flip-card m-3">
           <div class="flip-card-inner">
@@ -168,7 +158,7 @@
               <p class="number text-white">9759 2484 5269 6576</p>
               <p class="valid_thru text-white">VALID THRU</p>
               <p class="date_8264 text-white">1 2 / 3 6</p>
-              <p class="name text-white">BRUCE WAYNE</p>
+              <p class="name text-white">{{client.firstName.toUpperCase()}} {{client.lastName.toUpperCase()}}</p>
             </div>
             <div class="flip-card-back">
               <div class="strip"></div>
@@ -184,7 +174,7 @@
         <div class="flip-card2 d-flex" v-for="accounts of account">
           <div class="flip-card-inner2">
             <div class="flip-card-front2">
-              <img src="../images/foto-card.png" alt="" />
+              <img src="../images/foto-card-removebg-preview.png" alt="" />
             </div>
             <div class="flip-card-back2">
               <div class="d-flex justify-content-around">
@@ -197,7 +187,7 @@
                     <p>{{accounts.creationDate}}</p>
                     <h5 class="card-subtitle">Balance: ${{accounts.balance.toFixed(2)}}</h5>
                   </div>
-                  <a v-bind:href="'./account.html?id=' + accounts.id">Ver detalles</a>
+                  <a v-bind:href="'./account.html?id=' + accounts.id" class="text-center buttom mt-2 text-decoration-none">See Details</a>
                 </div>
               </div>
             </div>

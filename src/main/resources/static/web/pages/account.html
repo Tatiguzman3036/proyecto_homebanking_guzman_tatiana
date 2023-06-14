@@ -10,7 +10,7 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg bg-black m-2 rounded-2">
+        <nav class="navbar navbar-expand-lg m-2 rounded-2">
           <div class="container-fluid">
             <a class="navbar-brand" href="#">
               <img class="imagennavbar" src="../images/la-guzmi.png" alt="" />
@@ -30,33 +30,20 @@
                   <a class="nav-link disabled text-white">Customer Support</a>
                 </li>
               </ul>
-              <form class="d-flex" role="search">
-                <input
-                  class="form-control me-2"
-                  type="search"
-                  placeholder="Search"
-                  aria-label="Search"
-                />
-                <button class="btn btn-outline-success" type="submit">
-                  Search
-                </button>
-              </form>
             </div>
           </div>
         </nav>
       </header>
-    <main id="app">
-        <div>
-            <h1 class="text-center text-bg-secondary ">Your account details:</h1>
-        </div>
-        <div class="d-flex justify-content-center pt-4">
-          <table>
-            <caption class="text-center te fs-3">Account Number:{{allAccount.number}} </caption>
+    <main id="app" class="pt-5">
+        <div v-if="transactions !=0" class="d-flex justify-content-around gap-3 flex-wrap">
+          <table class="w-50">
+            <caption class="text-center text-bg-secondary">Your account details:</caption>
+            <caption class="text-center fs-3">Account Number:{{allAccount.number}} </caption>
             <thead>
               <tr>
                 <th>Type of Description</th>
-                <th>Amount</th>
                 <th>Description</th>
+                <th>Amount</th>
                 <th>Date</th>
                 <th>Time</th>
               </tr>
@@ -65,13 +52,35 @@
               <tr v-for="account of transactions">
                 <td class="text-danger" v-if="account.type == `DEBIT`" >{{account.type}} </td>
                 <td class="text-success" v-else>{{account.type}} </td>
-                <td>{{account.amount}} </td>
                 <td >{{account.description}} </td>
+                <td class="text-danger" v-if="account.type == `DEBIT`" >${{account.amount}} </td>
+                <td class="text-success" v-else>${{account.amount}} </td>
                 <td>{{account.date.slice(0,10)}} </td>
                 <td>{{account.date.slice(11,19)}} </td>
               </tr>
             </tbody>
           </table>
+          <div class="card" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title text-white">➼Detailed data of your account:</h5>
+                <h3 class="text-center text-white">{{allAccount.number}}</h3>
+              <h5 class="card-subtitle text-white">➼Creation Date:{{allAccount.creationDate}}</h5>
+              <h5 class="card-subtitle text-white">➼Balance: ${{allAccount.balance.toFixed(2)}}</h5>
+            </div>
+          </div>
+        </div>
+        <div v-else class="d-flex ">
+          <img class="iamgenElse w-50 h-50" src="../images/maxresdefault-removebg-preview.png" alt="">
+         <div class="text-velse">
+            <h4 class="text-white text-center">Oops, it seems that something happened...</h4>
+            <h5 class="text-white text-center">It appears that you don't have any transactions in that account.</h5>
+            <h5 class="text-white text-center">For any inquiries, you can contact us by accessing the "Contact" section, 
+              and we will assist you with your situation.</h5>
+            <p class="text-white text-center m-2">Thank you very much, Central Bank "La Guzmi".</p>
+         </div>
+        </div>
+        <div class="d-flex justify-content-center align-items-center">
+          <a class="text-center buttom m-5 text-decoration-none" href="./accounts.html">Go Back</a>
         </div>
     </main>
     

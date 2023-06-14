@@ -54,7 +54,6 @@ public class  HomebankingApplication {
 			transactionRepository.save(transaction02);
 			transactionRepository.save(transaction03);
 			transactionRepository.save(transaction04);
-			System.out.println(transaction02);
 
 
 
