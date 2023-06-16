@@ -37,8 +37,8 @@
     <main id="app" class="pt-5">
         <div v-if="transactions !=0" class="d-flex justify-content-around gap-3 flex-wrap">
           <table class="w-50">
-            <caption class="text-center text-bg-secondary">Your account details:</caption>
-            <caption class="text-center fs-3">Account Number:{{allAccount.number}} </caption>
+            <caption class="text-center text-white">Your account details:</caption>
+            <caption class="text-center text-white fs-3">Account Number:{{allAccount.number}} </caption>
             <thead>
               <tr>
                 <th>Type of Description</th>
@@ -50,11 +50,11 @@
             </thead>
             <tbody>
               <tr v-for="account of transactions">
-                <td class="text-danger" v-if="account.type == `DEBIT`" >{{account.type}} </td>
-                <td class="text-success" v-else>{{account.type}} </td>
+                <td class="text-danger" v-if="account.type == `DEBIT`" ><strong>{{account.type}}</strong> </td>
+                <td class="text-success" v-else><strong>{{account.type}}</strong> </td>
                 <td >{{account.description}} </td>
-                <td class="text-danger" v-if="account.type == `DEBIT`" >${{account.amount}} </td>
-                <td class="text-success" v-else>${{account.amount}} </td>
+                <td class="text-danger" v-if="account.type == `DEBIT`" ><strong>${{account.amount}}</strong> </td>
+                <td class="text-success" v-else><strong>${{account.amount}}</strong> </td>
                 <td>{{account.date.slice(0,10)}} </td>
                 <td>{{account.date.slice(11,19)}} </td>
               </tr>
@@ -69,7 +69,7 @@
             </div>
           </div>
         </div>
-        <div v-else class="d-flex ">
+        <div v-else class="d-flex p-5">
           <img class="iamgenElse w-50 h-50" src="../images/maxresdefault-removebg-preview.png" alt="">
          <div class="text-velse">
             <h4 class="text-white text-center">Oops, it seems that something happened...</h4>

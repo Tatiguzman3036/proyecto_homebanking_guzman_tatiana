@@ -39,15 +39,15 @@ public class  HomebankingApplication {
 			Transaction transaction03 = new Transaction(TransactionType.CREDIT, 1300.00,"Rock Donuts", LocalDateTime.now());
 			Transaction transaction04 = new Transaction(TransactionType.DEBIT, -1500.00,"Suship", LocalDateTime.now());
 
-			List<Integer> mortgage = List.of(12,24,36,48,60);
-			Loan loan1 = new Loan("Mortgage", 500.000, mortgage);
-			List<Integer> personal = List.of(6,12,24);
-			Loan loan2 = new Loan("Personal", 100.000,personal);
-			List<Integer> automotive = List.of(6,12,24,36);
-			Loan loan3 = new Loan("Automotive", 300.000, automotive);
-			loanRepository.save(loan1);
-			loanRepository.save(loan2);
-			loanRepository.save(loan3);
+			List<Integer> mortgageList = List.of(12,24,36,48,60);
+			Loan mortgage = new Loan("Mortgage", 500.000, mortgageList);
+			List<Integer> personalList = List.of(6,12,24);
+			Loan personal = new Loan("Personal", 100.000,personalList);
+			List<Integer> automotiveList = List.of(6,12,24,36);
+			Loan automotive = new Loan("Automotive", 300.000, automotiveList);
+			loanRepository.save(mortgage);
+			loanRepository.save(personal);
+			loanRepository.save(automotive);
 
 			////AGREGAR A LOS CLIENTES::://///////
 //			Loan loanMelba = new Loan("Mortgage Loan",400000.0, Collections.singletonList(60));
@@ -83,16 +83,18 @@ public class  HomebankingApplication {
 			transactionRepository.save(transaction04);
 
 
-//			loanRepository.save(loanMelba);
-//			loanRepository.save(loanMelba2);
-//			loanRepository.save(loanTatiana);
-//			loanRepository.save(loanTatiana2);
+//			loanRepository.save(loanMelba);//
+//			loanRepository.save(loanMelba2);//
+//			loanRepository.save(loanTatiana);//
+//			loanRepository.save(loanTatiana2);//
 			melba.addClientLoan(mortgageMelba);
-			loan1.addClientLoan(mortgageMelba);
+			mortgage.addClientLoan(mortgageMelba);
 			melba.addClientLoan(personalMelba);
-			loan2.addClientLoan(personalMelba);
-			tatiana.addClientLoan(personalTatiana);
-			tatiana.addClientLoan(automotiveTatiana);
+			personal.addClientLoan(personalMelba);
+//			tatiana.addClientLoan(personalTatiana);
+//			personal.addClientLoan(personalTatiana);
+//			tatiana.addClientLoan(automotiveTatiana);
+//			automotive.addClientLoan(automotiveTatiana);
 			clientLoanRepository.save(mortgageMelba);
 			clientLoanRepository.save(personalMelba);
 			clientLoanRepository.save(personalTatiana);

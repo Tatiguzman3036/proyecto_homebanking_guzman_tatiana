@@ -27,17 +27,15 @@ table {
     background-color: #00000066;
 }
 table, th, tr, td {
-    /* color: white; */
-    /* width: 65vw !important; */
     border: 2px solid black !important;
     border-collapse: collapse !important;
     text-align: center !important;
-    border-radius: 10px !important;
-    background-color: beige;
+    background-color: #00000070;
+  color: white;
 }
 caption {
     padding: 0.3em;
-    background: #fff;
+    background: #00000070;
     caption-side: top !important;
 }
 .navbar {
@@ -60,7 +58,7 @@ caption {
 }
 .text-velse{
     background-color: #000000ad;
-    padding-top: 2rem !important;
+    padding: 5rem !important;
     border-radius: 10px !important;
 }
 .card {

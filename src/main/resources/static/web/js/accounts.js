@@ -5,6 +5,7 @@ const app = createApp({
         return{
             client:[],
             account: [],
+            loan:[],
         }
     },
     created(){
@@ -19,7 +20,9 @@ const app = createApp({
                 this.account = res.data.accounts;
                 this.account.sort((itemA, itemB)=> itemA.id - itemB.id)
                 console.log(this.account);
-
+                this.loan= res.data.loans
+                this.loan.sort((itemA,itemB) => itemA.id - itemB.id)
+                console.log(this.loan);
             })
             .catch(error => console.log(error))
         },

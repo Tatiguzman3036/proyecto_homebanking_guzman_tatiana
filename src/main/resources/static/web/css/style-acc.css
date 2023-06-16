@@ -2,17 +2,19 @@
     padding: 0 !important;
     margin: 0 !important;
     box-sizing: border-box !important;
+
 }
 body {
-    background-image: url(../images/54347.jpg) !important;
-    background-position: center !important;
-    background-repeat: no-repeat !important;
-    background-size: cover !important;
+  background-image: url(../images/54347.jpg) !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
 }
 header {
     min-height: 17vh !important;
 }
 main {
+  margin-bottom: 1.5rem !important;
     min-height: 75vh !important;
 }
 footer {
@@ -26,13 +28,15 @@ footer {
     width: 10vw !important;
 }
 .ya{
-    border-radius: 10px;
-    background-color: rgba(46, 55, 63, 0.479);
-    font-size: 2rem !important;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+  width: 90vw !important;
+  border: 1px solid black !important;
+  border-radius: 10px;
+  background-color: rgba(46, 55, 63, 0.479);
+  font-size: 2rem !important;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
 } 
 .buttom{
-  background-color: rgba(104, 68, 92, 0.959);
+  background-color: rgb(169 6 151 / 96%);
   color: #fff;
   font-size: 1rem !important;
 }
@@ -41,7 +45,26 @@ footer {
   color: #fff;
   font-size: 1.2rem !important;
 }
-
+table {
+  width: 90vw !important;
+  background-color: #00000066;
+}
+table, th, tr, td, caption {
+  border: 2px solid black !important;
+  border-collapse: collapse !important;
+  text-align: center !important;
+  border-radius: 10px !important;
+  color: white;
+}
+caption {
+  padding: 0.3em;
+  caption-side: top !important;
+  color: black !important;
+}
+.imagensorry {
+  width: 25vw !important;
+  height: 25vh !important;
+}
 
 .flip-card {
     background-color: transparent;
@@ -243,4 +266,10 @@ footer {
      rgb(255 185 160 / 11%) 78%);
     color: white;
     transform: rotateY(180deg);
+  }
+
+  @media only screen and(min-width: 320px) {
+    #imagensorry{
+      display: none !important;
+    }
   }
