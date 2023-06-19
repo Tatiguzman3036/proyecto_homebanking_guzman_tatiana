@@ -18,7 +18,9 @@ public class AccountController {
     private AccountRepository accountRepository;
 
     @RequestMapping("/accounts")
+
     public List<AccountDTO> getAll() {
+
         return accountRepository.findAll()
                 .stream()
                 .map(AccountDTO::new)

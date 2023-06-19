@@ -2,10 +2,7 @@ package com.mindhub.homebanking.models;
 
 import net.minidev.json.annotate.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.mapping.Collection;
-
 import javax.persistence.*;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -25,17 +22,7 @@ public class Client {
     private Set<ClientLoan> clientLoans = new HashSet<>();
 
     public Client() {}
-
-    @Override
-    public String toString() {
-        return "Client{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", email='" + email + '\'' +
-                '}';
-    }
-
+    
     public Client(String first, String last, String mail) {
         firstName = first;
         lastName = last;
@@ -83,6 +70,16 @@ public class Client {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    @Override
+    public String toString() {
+        return "Client{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                '}';
     }
 
 }
