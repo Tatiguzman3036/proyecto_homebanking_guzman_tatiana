@@ -7,13 +7,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 
 
 @SpringBootApplication
@@ -24,7 +20,7 @@ public class  HomebankingApplication {
 
 	}
 	@Bean
-	public CommandLineRunner initData (ClientRepository clientRepository, AccountRepository accountRepository, TransactionRepository transactionRepository, LoanRepository loanRepository, ClientLoanRepository clientLoanRepository){
+	public CommandLineRunner initData (ClientRepository clientRepository, AccountRepository accountRepository, TransactionRepository transactionRepository, LoanRepository loanRepository, ClientLoanRepository clientLoanRepository,CardRepository cardRepository){
 		return args -> {
 			Client melba = new Client("Melba", "Morel", "melba@mindhub.com" );
 			Client tatiana = new Client("Tatiana", "Guzman", "tatiguzmn@hotmail.com");
@@ -48,13 +44,6 @@ public class  HomebankingApplication {
 			loanRepository.save(mortgage);
 			loanRepository.save(personal);
 			loanRepository.save(automotive);
-
-			////AGREGAR A LOS CLIENTES::://///////
-//			Loan loanMelba = new Loan("Mortgage Loan",400000.0, Collections.singletonList(60));
-//			Loan loanMelba2 = new Loan("Personal Loan", 50000.0,Collections.singletonList(12));
-//			Loan loanTatiana = new Loan("Personal Loan", 100000.0, Collections.singletonList(24));
-//			Loan loanTatiana2 = new Loan("Automotive Loan",200000.0, Collections.singletonList(36));
-
 			//AGREGO CLIENTES CON CLIENTLOAN::///
 			ClientLoan mortgageMelba = new ClientLoan(400000.0,60);
 			ClientLoan personalMelba = new ClientLoan(50000.0,12);
@@ -99,8 +88,16 @@ public class  HomebankingApplication {
 			clientLoanRepository.save(personalMelba);
 			clientLoanRepository.save(personalTatiana);
 			clientLoanRepository.save(automotiveTatiana);
+			Card gold = new Card(CardType.DEBIT,ColorType.GOLD, (short) 750,LocalDateTime.now(),LocalDateTime.now().plusYears(5));
+			Card titanium = new Card(CardType.CREDIT,ColorType.TITANIUM,(short)698,LocalDateTime.now(),LocalDateTime.now().plusYears(5));
+			Card silver = new Card( CardType.CREDIT,ColorType.SILVER,(short)711,LocalDateTime.now(),LocalDateTime.now().plusYears(5));
 
-
+			melba.addCards(gold);
+			melba.addCards(titanium);
+			cardRepository.save(gold);
+			cardRepository.save(titanium);
+			tatiana.addCards(silver);
+			cardRepository.save(silver);
 		};
 
 	}
