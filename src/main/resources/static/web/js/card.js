@@ -4,9 +4,9 @@ const app = createApp({
     data(){
         return{
             client:[],
-            account: [],
-            loan:[],
-            card:[],
+            card: [],
+            creditCard:[],
+            debitCard: [],
         }
     },
     created(){
@@ -18,16 +18,13 @@ const app = createApp({
             .then(res => {
                 this.client = res.data
                 console.log(this.client);
-                this.account = res.data.accounts;
-                this.account.sort((itemA, itemB)=> itemA.id - itemB.id)
-                console.log(this.account);
-                this.loan= res.data.loans
-                this.loan.sort((itemA,itemB) => itemA.id - itemB.id)
-                console.log(this.loan);
-                this.card = this.client.cards;
-                this.card((itemA,itemB) => itemA.id - itemB.id)
+                this.card = this.client.cards
                 console.log(this.card);
-
+                this.creditCard = this.card.filter(card => card.type == "CREDIT").sort((itemA, itemB)=> itemA.id - itemB.id)
+                console.log(this.creditCard);
+                this.debitCard = this.card.filter(card => card.type == "DEBIT").sort((itemA, itemB)=> itemA.id - itemB.id)
+                console.log(this.debitCard);
+                
             })
             .catch(error => console.log(error))
         },

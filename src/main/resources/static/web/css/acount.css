@@ -18,6 +18,9 @@ main {
 footer {
     height: 5vh !important;
 }
+.navbar {
+    background-color: #0f3c69!important;
+}
 .imagennavbar {
     height: 15vh !important;
     width: 10vw !important;
@@ -38,9 +41,7 @@ caption {
     background: #00000070;
     caption-side: top !important;
 }
-.navbar {
-    background-color: #0f3c69!important;
-  }
+
 .buttom{
     background-color: rgba(104, 68, 92, 0.959);
     color: #fff;

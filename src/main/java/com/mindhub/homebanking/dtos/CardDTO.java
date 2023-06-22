@@ -14,8 +14,11 @@ public class CardDTO {
     private Short cvv;
     private LocalDateTime thruDate;
     private LocalDateTime fromDate;
+    private String number;
     public CardDTO(Card cards) {
-        this.cardholder = cards.getClient().getFirstName()+ " "+ cards.getClient().getLastName();
+        this.id = cards.getId();
+
+        this.cardholder = cards.getCardholder();
 
         this.type= cards.getType();
 
@@ -26,6 +29,7 @@ public class CardDTO {
         this.fromDate = cards.getFromDate();
 
         this.thruDate = cards.getThruDate();
+        this.number = cards.getNumber();
     }
 
     public long getId() {
@@ -54,5 +58,9 @@ public class CardDTO {
 
     public LocalDateTime getFromDate() {
         return fromDate;
+    }
+
+    public String getNumber() {
+        return number;
     }
 }

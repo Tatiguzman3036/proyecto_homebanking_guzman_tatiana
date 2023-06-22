@@ -28,6 +28,9 @@
               <a class="nav-link text-white" href="#">Accounts</a>
             </li>
             <li class="nav-item">
+              <a class="nav-link text-white" href="./card.html">Card</a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link disabled text-white">Disabled</a>
             </li>
           </ul>
@@ -41,9 +44,9 @@
       <h3 class="d-flex flex-column align-items-center m-2 text-white ya">Welcome {{client.firstName}} {{client.lastName}}!</h3>
     </div>
     <article class="d-flex justify-content-center">
-      <div class=" flip-card m-3">
-        <div class="flip-card-inner">
-          <div class="flip-card-front">
+      <div class=" flip-card m-3" v-for="card of card">
+        <div class="flip-card-inner"  v-bind:class="colorType(card)" >
+          <div class="flip-card-front" >
                 <p class="heading_8264 text-white">BANK "LA GUZMI"</p>
                 <svg
                   viewBox="0 0 48 48"
@@ -158,7 +161,7 @@
                 <p class="number text-white">9759 2484 5269 6576</p>
                 <p class="valid_thru text-white">VALID THRU</p>
                 <p class="date_8264 text-white">1 2 / 3 6</p>
-                <p class="name text-white">{{client.firstName.toUpperCase()}} {{client.lastName.toUpperCase()}}</p>
+                <p class="name text-white">{{card.cardholder}}</p>
           </div>
           <div class="flip-card-back">
             <div class="strip"></div>
@@ -177,7 +180,7 @@
       <div class="flip-card2 d-flex" v-for="accounts of account">
         <div class="flip-card-inner2">
           <div class="flip-card-front2">
-            <img src="../images/foto-card-removebg-preview.png" alt="" />
+            <img src="../images/la-guzmi.card.png" alt="" />
           </div>
           <div class="flip-card-back2">
             <div class="d-flex justify-content-around">

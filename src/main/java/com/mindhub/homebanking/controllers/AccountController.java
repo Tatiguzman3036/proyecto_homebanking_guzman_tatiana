@@ -19,7 +19,7 @@ public class AccountController {
 
     @RequestMapping("/accounts")
 
-    public List<AccountDTO> getAll() {
+    public List<AccountDTO> getAccountsDTO() {
 
         return accountRepository.findAll()
                 .stream()

@@ -14,7 +14,6 @@ public class AccountDTO {
 
     private Set<TransactionDTO> transaction;
 
-    public AccountDTO(){}
     public AccountDTO(Account account) {
 
         this.id = account.getId();
