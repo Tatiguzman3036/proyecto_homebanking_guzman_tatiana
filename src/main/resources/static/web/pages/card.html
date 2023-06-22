@@ -37,6 +37,7 @@
       </header>
       <main id="app">
         <!-- ------------------------------------------tarjeta Credito----------------------- -->
+        <div v-if="card != 0">
        <section class="d-flex justify-content-center">
         <h2 class="ya m-2 text-white text-center ">Credit Cards:</h2>
        </section>
@@ -304,6 +305,10 @@
               </div>
             </div>
           </article>
+        </div>
+        <div  v-else>
+          <h2 class="text-center text-white">You do not have cards at the moment...</h2>
+        </div>
       </main>
     
 
