@@ -14,7 +14,7 @@ const app = createApp({
     },
     methods:{
         loadData(){
-            axios.get("http://localhost:8080/api/clients/1")
+            axios.get("http://localhost:8080/api/clients/current")
             .then(res => {
                 this.client = res.data
                 console.log(this.client);
@@ -40,6 +40,13 @@ const app = createApp({
                 return 'titanium'
             }
             
+        },
+        signOut(){
+            axios.post('/api/logout')
+            .then(response => {
+                console.log('signed out!!!')
+                window.location.href = "/web/pages/login.html"
+            }).catch(error => console.log(error))
         }
     }
 });

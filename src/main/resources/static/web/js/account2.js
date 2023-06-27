@@ -3,22 +3,18 @@ const {createApp} = Vue;
 const app = createApp({
     data(){
         return{
-            allAccount: [],
+            account: [],
             id: "",
             transactions:[],
 
         }
     },
     created(){
-        let parametros = new URLSearchParams (location.search)
-        this.id = parametros.get("id")
-        axios.get(`http://localhost:8080/api/accounts/${this.id}`)
+        axios.get(`http://localhost:8080/api/clients/current`)
         .then(res =>{
-            this.allAccount = res.data
-            console.log(this.allAccount);
-            this.transactions = this.allAccount.transaction;
-            this.transactions.sort((itemA, itemB) => itemB.id - itemA.id);
-            console.log(this.transactions);
+            this.account = res.data.accounts
+
+            console.log(this.account);
         }).catch(error => console.log(error))
     },
     methods:{

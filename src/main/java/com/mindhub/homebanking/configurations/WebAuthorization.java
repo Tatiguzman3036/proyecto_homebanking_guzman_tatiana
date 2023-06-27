@@ -1,10 +1,12 @@
 package com.mindhub.homebanking.configurations;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.WebAttributes;
 import org.springframework.security.web.authentication.logout.HttpStatusReturningLogoutSuccessHandler;
 
@@ -14,16 +16,15 @@ import javax.servlet.http.HttpSession;
 
 @EnableWebSecurity
 @Configuration
-class WebAuthorization extends WebSecurityConfigurerAdapter {
+class WebAuthorization {
 
-    @Override
-
-    protected void configure(HttpSecurity http) throws Exception {
+    @Bean
+    protected SecurityFilterChain filterchain (HttpSecurity http) throws Exception {
 
         http.authorizeRequests()
                 .antMatchers("/web/index.html", "/web/pages/login.html").permitAll()
-                .antMatchers(HttpMethod.POST,"/api/login").permitAll()
-                .antMatchers("/web/manager.html", "/h2-console/**", "/rest/**", "web/js/**","web/css/**", "web/images/**").hasAuthority("ADMIN")
+                .antMatchers(HttpMethod.POST,"/api/login", "api/clients").permitAll()
+                .antMatchers("/web/manager.html", "/rest/**","/h2-console/**", "web/js/**","web/css/**", "web/images/**").hasAuthority("ADMIN")
                 .antMatchers("/web/pages/account.html","/web/pages/accounts.html","/web/pages/card.html").hasAuthority("CLIENT");
 
 
@@ -37,13 +38,11 @@ class WebAuthorization extends WebSecurityConfigurerAdapter {
 
 
 
-        http.logout().logoutUrl("/api/logout");
+        http.logout().logoutUrl("/api/logout").deleteCookies("JSESSIONID");
 
         // Desactivar la verificación de tokens CSRF
 
         http.csrf().disable();
-
-
 
         // Desactivar las opciones de frameOptions para acceder a h2-console
 
@@ -65,6 +64,7 @@ class WebAuthorization extends WebSecurityConfigurerAdapter {
 
         http.logout().logoutSuccessHandler(new HttpStatusReturningLogoutSuccessHandler());
 
+        return http.build();
     }
 
     private void clearAuthenticationAttributes(HttpServletRequest request) {

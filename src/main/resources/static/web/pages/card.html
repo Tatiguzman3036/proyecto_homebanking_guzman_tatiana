@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Client Manager | Cards</title>
+    <title>Bank "LA GUZMI"|Cards</title>
     <link rel="shortcut icon" href="../images/la-guzmi.png" type="image/x-icon" />
     <link rel="stylesheet" href="../css/card.css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous" />
 </head>
 <body>
+  <div id="app"> 
     <header>
         <nav class="navbar navbar-expand-lg m-2 rounded-2">
           <div class="container-fluid">
@@ -24,18 +25,24 @@
                   <a class="nav-link text-white active" aria-current="page" href="../pages/accounts.html">Home</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link text-white" href="./account.html">Account</a>
+                  <a class="nav-link text-white" href="./accounts2.html">Account</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link  text-white" href="#">Card</a>
+                  <a class="nav-link text-white" href="./card.html">Card</a>
                 </li>
+                <li class="nav-item">
+                  <a class="nav-link disabled text-white">Customer Support</a>
+                </li>
+                <div class=" d-flex justify-content-center align-items-center">
+                  <button type="button" class="buttonSignOut" @click="signOut()">Sign Out</button>
+                </div>
               </ul>
               </form>
             </div>
           </div>
         </nav>
       </header>
-      <main id="app">
+      <main>
         <!-- ------------------------------------------tarjeta Credito----------------------- -->
         <div v-if="card != 0">
        <section class="d-flex justify-content-center">
@@ -309,13 +316,11 @@
         <div  v-else>
           <h2 class="text-center text-white">You do not have cards at the moment...</h2>
         </div>
-      </main>
-    
-
-
+    </main>
     <footer class="bg-black m-2 rounded-2 text-center">
         <h5 class="text-white">&copy Developed By : Tatiana Guzmán</h5>
-      </footer>
+    </footer>
+  </div>
         <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
         <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
         <script src="../js/card.js"></script>
