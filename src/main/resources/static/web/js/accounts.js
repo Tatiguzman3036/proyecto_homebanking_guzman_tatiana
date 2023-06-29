@@ -7,6 +7,7 @@ const app = createApp({
             account: [],
             loan:[],
             card:[],
+            createdAccounts:[],
         }
     },
     created(){
@@ -27,9 +28,18 @@ const app = createApp({
                 this.card = this.client.cards;
                 this.card((itemA,itemB) => itemA.id - itemB.id)
                 console.log(this.card);
-
+                
             })
             .catch(error => console.log(error))
+        },
+        created(){
+            axios.post("http://localhost:8080/api/clients/current/accounts")
+            .then(res => {
+                    this.loadData()
+                    this.createdAccounts = res
+                
+            }).catch(error =>
+                console.log(error))
         },
         colorType(card){
             if (card.color === "GOLD") {

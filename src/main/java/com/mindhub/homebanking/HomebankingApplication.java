@@ -95,9 +95,9 @@ public class  HomebankingApplication {
 			clientLoanRepository.save(personalMelba);
 			clientLoanRepository.save(personalTatiana);
 			clientLoanRepository.save(automotiveTatiana);
-			Card gold = new Card(melba.getFirstName()+ " "+ melba.getLastName(), CardType.DEBIT,ColorType.GOLD, (short) 750,LocalDateTime.now(),LocalDateTime.now().plusYears(5),"5541-7685-9210-0016");
-			Card titanium = new Card(melba.getFirstName()+ " "+ melba.getLastName(),CardType.CREDIT,ColorType.TITANIUM,(short)698,LocalDateTime.now(),LocalDateTime.now().plusYears(5),"1918-4645-7070-0302");
-			Card silver = new Card(melba.getFirstName()+" "+ melba.getLastName(), CardType.CREDIT,ColorType.SILVER,(short)711,LocalDateTime.now(),LocalDateTime.now().plusYears(5),"5578-2588-4091-3036");
+			Card gold = new Card(melba.getFirstName()+ " "+ melba.getLastName(), CardType.DEBIT,ColorType.GOLD, 750,LocalDateTime.now().plusYears(5),LocalDateTime.now(),"5541-7685-9210-0016");
+			Card titanium = new Card(melba.getFirstName()+ " "+ melba.getLastName(),CardType.CREDIT,ColorType.TITANIUM,698,LocalDateTime.now().plusYears(5),LocalDateTime.now(),"1918-4645-7070-0302");
+			Card silver = new Card(melba.getFirstName()+" "+ melba.getLastName(), CardType.CREDIT,ColorType.SILVER,711,LocalDateTime.now().plusYears(5),LocalDateTime.now(),"5578-2588-4091-3036");
 
 			melba.addCards(gold);
 			melba.addCards(titanium);

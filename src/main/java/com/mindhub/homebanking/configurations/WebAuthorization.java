@@ -24,8 +24,9 @@ class WebAuthorization {
         http.authorizeRequests()
                 .antMatchers("/web/index.html", "/web/pages/login.html").permitAll()
                 .antMatchers(HttpMethod.POST,"/api/login", "api/clients").permitAll()
+                .antMatchers(HttpMethod.POST,"/api/clients/current/accounts","/api/clients/current/cards").hasAuthority("CLIENT")
                 .antMatchers("/web/manager.html", "/rest/**","/h2-console/**", "web/js/**","web/css/**", "web/images/**").hasAuthority("ADMIN")
-                .antMatchers("/web/pages/account.html","/web/pages/accounts.html","/web/pages/card.html").hasAuthority("CLIENT");
+                .antMatchers("/web/pages/account.html","/web/pages/accounts.html","/web/pages/card.html","/api/clients/current/accounts").hasAuthority("CLIENT");
 
 
         http.formLogin()
