@@ -48,7 +48,7 @@
     <div class="d-flex justify-content-center">
       <h3 class="d-flex flex-column align-items-center m-2 text-white ya">Welcome {{client.firstName}} {{client.lastName}}!</h3>
     </div>
-    <article class="d-flex justify-content-center">
+    <!-- <article class="d-flex justify-content-center">
       <div class=" flip-card m-3" v-for="card of card">
         <div class="flip-card-inner"  v-bind:class="colorType(card)" >
           <div class="flip-card-front" >
@@ -177,7 +177,7 @@
           </div>
         </div>
       </div>
-    </article>
+    </article> -->
     <div class="d-flex"  v-if="account.length < 3">
         <h3 class="d-flex justify-content-center align-items-center ya m-2 text-white">Your Accounts:</h3>
           <button class="buttonCreatedAccount" @click="created()">Created Account</button>

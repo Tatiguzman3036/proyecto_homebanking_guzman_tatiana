@@ -27,3 +27,73 @@ footer {
     height: 15vh !important;
     width: 10vw !important;
 }
+.imgCards{
+  width: 25vw !important;
+  height: 25vh !important;
+}
+.card{
+  border-radius: 10px !important;
+  box-shadow: 0 0 10px #dadada;
+  background-color: rgba(75, 74, 74, 0.808) !important;
+}
+.buttonSignOut{
+  width: 130px;
+  height: 40px;
+  font-size: 1.1em;
+  cursor: pointer;
+  background-color: #171717;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  transition: all .4s;
+  margin-right: 0.5rem !important;
+}
+.buttonSignOut:hover{
+  border-radius: 5px;
+  transform: translateY(-10px);
+  box-shadow: 0 7px 0 -2px #f85959,
+   0 15px 0 -4px #39a2db,
+   0 16px 10px -3px #39a2db;
+}
+.buttonSignOut:active{
+  transition: all 0.2s;
+  transform: translateY(-5px);
+  box-shadow: 0 2px 0 -2px #f85959,
+   0 8px 0 -4px #39a2db,
+   0 12px 10px -3px #39a2db;
+}
+.navbar-collapse{
+   flex-grow: 0 !important;
+}
+.submit{
+  width: 130px;
+  height: 40px;
+  font-size: 1.1em;
+  cursor: pointer;
+  background-color: #116b64;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  transition: all .4s;
+  margin-right: 0.5rem !important;
+}
+.submit:hover{
+  border-radius: 5px;
+  transform: translateY(-10px);
+  box-shadow: 0 7px 0 -2px #cfcc06,
+   0 15px 0 -4px #5739db,
+   0 16px 10px -3px #39a2db;
+}
+.submit:active{
+  transition: all 0.2s;
+  transform: translateY(-5px);
+  box-shadow: 0 2px 0 -2px #7ef859,
+   0 8px 0 -4px #39a2db,
+   0 12px 10px -3px #39a2db;
+}
+.imagenGoBack{
+  width: 3vw !important;
+  height: 5vh !important;
+  background-color: #f8f4f4 !important;
+  border-radius: 20px !important;
+}

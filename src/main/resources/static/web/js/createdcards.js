@@ -18,6 +18,13 @@ const app = createApp({
                 console.log(res);
                 window.location.href= '/web/pages/card.html'
             }).catch(err=> console.log(err))
+        },
+        signOut(){
+            axios.post('/api/logout')
+            .then(response => {
+                console.log('signed out!!!')
+                window.location.href = "/web/pages/login.html"
+            }).catch(error => console.log(error))
         }
     }
 })
