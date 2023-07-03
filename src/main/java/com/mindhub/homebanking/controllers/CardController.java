@@ -52,12 +52,7 @@ public class CardController {
                         cardNumberBuilder.append("-");
                     }
                     cardNumber = cardNumberBuilder.toString();
-                }
-                for (Card card : cardRepository.findAll()) {
-                    if (card.getCardholder().equals(cardNumber)) {
-                        cardNumberUnique = false;
-                        break;
-                    }
+                    cardNumberUnique = cardRepository.existsByNumber(cardNumber);
                 }
             } while (cardNumberUnique);
                 Card card = new Card(client.getFirstName() + " " + client.getLastName(), type, color, cvv, LocalDateTime.now().plusYears(5), LocalDateTime.now(), cardNumber);
