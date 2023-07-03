@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Random;
-
 import static java.util.stream.Collectors.toList;
 
 @RestController @RequestMapping("/api")
@@ -23,6 +22,8 @@ public class ClientController {
     private ClientRepository clientRepository;
     @Autowired
     private AccountRepository accountRepository;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @RequestMapping("/clients")
     public List<ClientDTO> getClientsDTO() {
@@ -31,15 +32,14 @@ public class ClientController {
                 .map(ClientDTO::new)
                 .collect(toList());
     }
-    @RequestMapping("/clients/{id}")
 
+    @RequestMapping("/clients/{id}")
     public ClientDTO getClientDTO(@PathVariable Long id){
 
         return new ClientDTO (clientRepository.findById(id).orElse(null));
 
     }
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+
     @RequestMapping(path = "/clients", method = RequestMethod.POST)
     public ResponseEntity<Object> register(
             @RequestParam String firstName, @RequestParam String lastName,
@@ -56,7 +56,7 @@ public class ClientController {
         String randomNumber;
         do {
             Random random = new Random();
-            randomNumber = "VIN-" + random.nextInt(99999999)+ 10000000;
+            randomNumber = "VIN-" + random.nextInt(99999999) + 10000000;
         }while (accountRepository.findByNumber(randomNumber) != null);
         Account account = new Account(randomNumber, LocalDate.now(), 0.0);
         account.setClient(client);
@@ -64,6 +64,7 @@ public class ClientController {
 
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
+
     @RequestMapping("/clients/current")
     public ClientDTO getAuthenticatedClient (Authentication authentication){
         return new ClientDTO(clientRepository.findByEmail(authentication.getName()));

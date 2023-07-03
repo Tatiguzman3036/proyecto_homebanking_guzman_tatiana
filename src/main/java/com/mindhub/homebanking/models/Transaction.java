@@ -15,7 +15,6 @@ public class Transaction {
     private double amount ;
     private String description;
     private LocalDateTime date;
-
     @ManyToOne (fetch = FetchType.EAGER)
     @JoinColumn(name = "transaction")
     private Account account;
@@ -25,6 +24,7 @@ public class Transaction {
         this.amount = amount;
         this.description = description;
         this.date = date;
+
     }
 
     @Override

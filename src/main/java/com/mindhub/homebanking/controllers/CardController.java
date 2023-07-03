@@ -11,7 +11,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
-
 import java.time.LocalDateTime;
 import java.util.Random;
 
@@ -21,6 +20,7 @@ public class CardController {
     private CardRepository cardRepository;
     @Autowired
     private ClientRepository clientRepository;
+
     @RequestMapping(path = "/clients/current/cards", method = RequestMethod.POST)
     public ResponseEntity<Object> createCard(@RequestParam CardType type, @RequestParam ColorType color, Authentication authentication) {
 
@@ -37,7 +37,7 @@ public class CardController {
         }
             // Generar número de tarjeta único
             String cardNumber = " ";
-            boolean cardNumberUnique = false;
+            boolean cardNumberUnique;
             int cvv;
             Random random = new Random();
             do {
@@ -51,14 +51,9 @@ public class CardController {
                     if (i < 3) {
                         cardNumberBuilder.append("-");
                     }
+                }
                     cardNumber = cardNumberBuilder.toString();
-                }
-                for (Card card : cardRepository.findAll()) {
-                    if (card.getCardholder().equals(cardNumber)) {
-                        cardNumberUnique = false;
-                        break;
-                    }
-                }
+                     cardNumberUnique = cardRepository.existsByNumber(cardNumber);
             } while (cardNumberUnique);
                 Card card = new Card(client.getFirstName() + " " + client.getLastName(), type, color, cvv, LocalDateTime.now().plusYears(5), LocalDateTime.now(), cardNumber);
                 client.addCards(card);

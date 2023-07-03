@@ -11,18 +11,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
-
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Random;
-
 import static java.util.stream.Collectors.toList;
 
 @RestController @RequestMapping("/api")
 public class AccountController {
     @Autowired
     private AccountRepository accountRepository;
-
     @Autowired
     private PasswordEncoder passwordEncoder;
     @Autowired
@@ -38,7 +35,6 @@ public class AccountController {
     }
 
     @RequestMapping("/accounts/{id}")
-
     public AccountDTO getAccount(@PathVariable Long id){
 
         return accountRepository.findById(id).map(client -> new AccountDTO(client)).orElse(null);
@@ -47,7 +43,6 @@ public class AccountController {
 
     @RequestMapping(path = "/clients/current/accounts", method = RequestMethod.POST)
     public ResponseEntity<Object> createAccount(Authentication authentication) {
-
         //genero el numero de cuentas aleatorias
         String randomNumber;
         do {

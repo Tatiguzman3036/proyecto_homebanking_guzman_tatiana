@@ -5,7 +5,8 @@
 }
 body {
     min-height: 100vh !important;
-    background-image: url(../images/54347.jpg) !important;
+    background: rgb(213,231,243);
+background: linear-gradient(90deg, rgba(213,231,243,1) 49%, rgba(11,198,236,1) 100%);
     background-position: center !important;
     background-repeat: no-repeat !important;
     background-size: cover !important;
