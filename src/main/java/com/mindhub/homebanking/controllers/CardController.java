@@ -51,9 +51,9 @@ public class CardController {
                     if (i < 3) {
                         cardNumberBuilder.append("-");
                     }
+                }
                     cardNumber = cardNumberBuilder.toString();
                     cardNumberUnique = cardRepository.existsByNumber(cardNumber);
-                }
             } while (cardNumberUnique);
                 Card card = new Card(client.getFirstName() + " " + client.getLastName(), type, color, cvv, LocalDateTime.now().plusYears(5), LocalDateTime.now(), cardNumber);
                 client.addCards(card);
