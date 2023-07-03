@@ -23,6 +23,8 @@ public class ClientController {
     private ClientRepository clientRepository;
     @Autowired
     private AccountRepository accountRepository;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @RequestMapping("/clients")
     public List<ClientDTO> getClientsDTO() {
@@ -31,15 +33,14 @@ public class ClientController {
                 .map(ClientDTO::new)
                 .collect(toList());
     }
-    @RequestMapping("/clients/{id}")
 
+    @RequestMapping("/clients/{id}")
     public ClientDTO getClientDTO(@PathVariable Long id){
 
         return new ClientDTO (clientRepository.findById(id).orElse(null));
 
     }
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+
     @RequestMapping(path = "/clients", method = RequestMethod.POST)
     public ResponseEntity<Object> register(
             @RequestParam String firstName, @RequestParam String lastName,
