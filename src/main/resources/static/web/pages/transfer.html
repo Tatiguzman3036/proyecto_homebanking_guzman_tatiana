@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/transfer.css">
+    <link rel="shortcut icon" href="../images/la-guzmi.png" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous" />
+</head>
+<body>
+    <div id="app">
+        <header>
+            <nav class="navbar navbar-expand-lg m-2 rounded-2">
+                <div class="container-fluid">
+                  <a class="navbar-brand" href="#">
+                    <img class="imagennavbar" src="../images/la-guzmi.png" alt="" />
+                  </a>
+                  <button class="navbar-toggler"type="button"data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                  </button>
+                  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 gap-3 text-center">
+                      <li class="nav-item">
+                        <a class="nav-link text-white active" aria-current="page" href="./accounts.html">Home</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link text-white" href="./accounts2.html">Account</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link text-white" href="./card.html">Card</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link disabled text-white">Customer Support</a>
+                      </li>
+                      <div class=" d-flex justify-content-center align-items-center">
+                        <button type="button" class="buttonSignOut" @click="signOut()">Sign Out</button>
+                      </div>
+                    </ul>
+                  </div>
+                </div>
+              </nav>
+        </header>
+        <main>
+              <div class="section">
+                <div class="container">
+                  <div class="row full-height justify-content-center">
+                    <div class="col-12 text-center align-self-center py-5">
+                      <div class="section pb-5 pt-5 pt-sm-2 text-center">
+                        <h6 class="mb-0 pb-3 ms-5">
+                            <span>Own account</span>
+                            <span>Third party account</span></h6>
+                              <input class="checkbox" type="checkbox" id="reg-log" name="reg-log"/>
+                              <label for="reg-log"></label>
+                        <div class="card-3d-wrap mx-auto">
+                          <div class="card-3d-wrapper">
+                            <div class="card-front">
+                              <div class="center-wrap">
+                                <div class="section text-center">
+                                  <h4 class="mb-4 pb-3 text-white">Own account</h4>
+                                  <div class="form-group">
+                                    <h5 class="text-white">Choose the account to use:</h5>
+                                    <select id="accountOrigin" class="form-select" v-model="transferDTO.accountOrigin" >
+                                        <option v-for="accounts of account" :value="accounts.number" >{{accounts.number}}</option>
+                                    </select>
+                                    <h5 class="text-white">Choose the account to transfer:</h5>
+                                    <select id="accountDestiny" class="form-select" v-model="transferDTO.accountDestination" >
+                                        <option v-for="accounts of account" :value="accounts.number" >{{accounts.number}} </option>
+                                    </select>
+                                    <label for="amount" class="text-white" >Amount:</label>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text">$</span>
+                                        <input type="number" class="form-control" id="amount" v-model="transferDTO.amount" aria-label="Amount (to the nearest dollar)">
+                                      </div>
+                                    <div class="input-group">
+                                        <span class="input-group-text">Description:</span>
+                                        <textarea class="form-control" v-model="transferDTO.description" aria-label="With textarea"></textarea>
+                                      </div>
+                                    <div class="d-flex justify-content-center m-1">
+                                        <input type="submit" class="submit m-1 text-center btn" value="SUBMIT" @click="makeTransfer()">
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>input-icon 
+                            </div>
+                            <div class="card-back">
+                              <div class="center-wrap">
+                                <div class="section text-center">
+                                  <h4 class="mb-4 pb-3 text-white">Third party account</h4>
+                                  <div class="form-group mt-2">
+                                    <label for=""  class="text-white">Choose your account that you will use:</label>
+                                    <select id="accountOrigin" class="form-select" v-model="transferDTO.accountOrigin" >
+                                        <option v-for="accounts of account" :value="accounts.number" >{{accounts.number}}</option>
+                                    </select>
+                                  </div>  
+                                  <div class="form-group mt-2">
+                                    <label for="accountDestination" class="text-white">Enter the account number to send:</label>
+                                    <input type="email" name="accountDestination" v-model="transferDTO.accountDestination" id="accountDestination" placeholder="ej: VIN-XXXXXX" autocomplete="off">
+                                  </div>  
+                                  <label for="amount" class="text-white" >Amount:</label>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text">$</span>
+                                        <input type="number" id="amount" v-model="transferDTO.amount" aria-label="Amount (to the nearest dollar)">
+                                      </div>
+                                    <div class="input-group">
+                                        <span class="input-group-text">Description:</span>
+                                        <textarea v-model="transferDTO.description" aria-label="With textarea"></textarea>
+                                      </div>
+                                    <div class="d-flex justify-content-center m-1">
+                                        <input type="submit" class="submit m-1 text-center btn" value="SUBMIT" @click="makeTransfer1()">
+                                    </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                  </div>
+              </div>
+            
+        </main>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="../js/transfer.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+      crossorigin="anonymous"
+    ></script>
+</body>
+</html>
