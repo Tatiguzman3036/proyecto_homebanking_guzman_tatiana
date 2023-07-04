@@ -31,6 +31,9 @@
                         <a class="nav-link text-white" href="./card.html">Card</a>
                       </li>
                       <li class="nav-item">
+                        <a class="nav-link text-white" href="#">Transfer</a>
+                      </li>
+                      <li class="nav-item">
                         <a class="nav-link disabled text-white">Customer Support</a>
                       </li>
                       <div class=" d-flex justify-content-center align-items-center">
@@ -43,9 +46,9 @@
         </header>
         <main>
               <div class="section">
-                <div class="container">
-                  <div class="row full-height justify-content-center">
-                    <div class="col-12 text-center align-self-center py-5">
+                <div>
+                  <div class="row justify-content-center">
+                    <div class="col-12 text-center">
                       <div class="section pb-5 pt-5 pt-sm-2 text-center">
                         <h6 class="mb-0 pb-3 ms-5">
                             <span>Own account</span>
@@ -57,15 +60,15 @@
                             <div class="card-front">
                               <div class="center-wrap">
                                 <div class="section text-center">
-                                  <h4 class="mb-4 pb-3 text-white">Own account</h4>
-                                  <div class="form-group">
+                                  <h4 class="mb-3 text-white">Own account</h4>
+                                  <div class="">
                                     <h5 class="text-white">Choose the account to use:</h5>
                                     <select id="accountOrigin" class="form-select" v-model="transferDTO.accountOrigin" >
-                                        <option v-for="accounts of account" :value="accounts.number" >{{accounts.number}}</option>
+                                        <option v-for="accounts of account" :value="accounts.number" >{{accounts.number}} , BALANCE:{{accounts.balance}}</option>
                                     </select>
                                     <h5 class="text-white">Choose the account to transfer:</h5>
                                     <select id="accountDestiny" class="form-select" v-model="transferDTO.accountDestination" >
-                                        <option v-for="accounts of account" :value="accounts.number" >{{accounts.number}} </option>
+                                        <option v-for="accounts of account" :value="accounts.number" >{{accounts.number}}, BALANCE:{{accounts.balance}} </option>
                                     </select>
                                     <label for="amount" class="text-white" >Amount:</label>
                                     <div class="input-group mb-3">
@@ -77,37 +80,37 @@
                                         <textarea class="form-control" v-model="transferDTO.description" aria-label="With textarea"></textarea>
                                       </div>
                                     <div class="d-flex justify-content-center m-1">
-                                        <input type="submit" class="submit m-1 text-center btn" value="SUBMIT" @click="makeTransfer()">
+                                        <input type="submit" class="submit m-1 text-center" value="SUBMIT" @click.prevent="makeTransfer()">
                                     </div>
                                   </div>
                                 </div>
-                              </div>input-icon 
+                              </div>
                             </div>
                             <div class="card-back">
                               <div class="center-wrap">
                                 <div class="section text-center">
-                                  <h4 class="mb-4 pb-3 text-white">Third party account</h4>
-                                  <div class="form-group mt-2">
-                                    <label for=""  class="text-white">Choose your account that you will use:</label>
+                                  <h4 class="mb-3 text-white">Third party account</h4>
+                                  <div class=" mt-2">
+                                    <h5 class="text-white">Choose your account that you will use:</h5>
                                     <select id="accountOrigin" class="form-select" v-model="transferDTO.accountOrigin" >
-                                        <option v-for="accounts of account" :value="accounts.number" >{{accounts.number}}</option>
+                                        <option v-for="accounts of account" :value="accounts.number" >{{accounts.number}}, BALANCE:{{accounts.balance}} </option>
                                     </select>
                                   </div>  
-                                  <div class="form-group mt-2">
+                                  <div class=" mt-2">
                                     <label for="accountDestination" class="text-white">Enter the account number to send:</label>
                                     <input type="email" name="accountDestination" v-model="transferDTO.accountDestination" id="accountDestination" placeholder="ej: VIN-XXXXXX" autocomplete="off">
                                   </div>  
                                   <label for="amount" class="text-white" >Amount:</label>
                                     <div class="input-group mb-3">
-                                        <span class="input-group-text">$</span>
-                                        <input type="number" id="amount" v-model="transferDTO.amount" aria-label="Amount (to the nearest dollar)">
+                                        <span class="input-group-text w-25">$</span>
+                                        <input type="number" id="amount" class="w-75" v-model="transferDTO.amount" aria-label="Amount (to the nearest dollar)">
                                       </div>
                                     <div class="input-group">
                                         <span class="input-group-text">Description:</span>
                                         <textarea v-model="transferDTO.description" aria-label="With textarea"></textarea>
                                       </div>
                                     <div class="d-flex justify-content-center m-1">
-                                        <input type="submit" class="submit m-1 text-center btn" value="SUBMIT" @click="makeTransfer1()">
+                                        <input type="submit" class="submit m-1 text-center" value="SUBMIT" @click.prevent="makeTransfer1()">
                                     </div>
                                     </div>
                                   </div>
@@ -121,6 +124,9 @@
               </div>
             
         </main>
+        <footer class="bg-black m-2 rounded-2 text-center">
+          <h5 class="text-white">&copy Developed By : Tatiana Guzmán</h5>
+      </footer>
 
     </div>
 
@@ -132,5 +138,6 @@
       integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
       crossorigin="anonymous"
     ></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 </html>

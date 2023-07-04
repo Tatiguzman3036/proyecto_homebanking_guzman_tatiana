@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
+import java.util.stream.Collectors;
 
 @RestController @RequestMapping("/api")
 public class TransactionController {
@@ -40,6 +41,9 @@ public class TransactionController {
         if ( transferDTO.getAmount().isNaN()){
             return new  ResponseEntity<>("falto el monto", HttpStatus.FORBIDDEN);
         }
+        if (transferDTO.getAmount() < 1.0){
+            return new ResponseEntity<>("Fondos insuficientes", HttpStatus.FORBIDDEN);
+        }
         if ( transferDTO.getDescription().isBlank()){
             return new  ResponseEntity<>("falto la descripcion", HttpStatus.FORBIDDEN);
         }
@@ -53,8 +57,8 @@ public class TransactionController {
             return new ResponseEntity<>("la cuenta de destino no existe", HttpStatus.FORBIDDEN);
         }
         Client client = clientRepository.findByEmail(authentication.getName());
-        if (!client.getAccounts().toString().contains(transferDTO.getAccountOrigin())){
-            return new ResponseEntity<>("la cuenta no te pertenece" , HttpStatus.FORBIDDEN);
+        if (client.getAccounts().stream().filter(item -> item.getNumber().equals(transferDTO.getAccountOrigin())).collect(Collectors.toSet()).isEmpty()){
+            return new ResponseEntity<>("la cuenta está en uso" , HttpStatus.FORBIDDEN);
         }
         if (accountOrigin.getBalance() < transferDTO.getAmount() ){
             return new ResponseEntity<>("la cuenta de origen no tiene fondos suficientes", HttpStatus.FORBIDDEN);
