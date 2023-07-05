@@ -103,9 +103,11 @@ const app = createApp({
                     }).catch(error =>{
                       this.error1 = error.response.data
                   Swal.fire(`${this.error1}`,'error');
-                  console.log(error)});
-              }
-            });
+                  console.log(error)})
+                    
+                  }})
+                  .catch(err => console.log(err));
+              
           }
           
           

@@ -60,6 +60,6 @@ public class AccountController {
             client.addAccount(account);
             accountRepository.save(account);
         }
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        return new ResponseEntity<>("Your account is created",HttpStatus.CREATED);
     }
 }

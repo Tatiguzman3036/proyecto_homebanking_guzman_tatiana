@@ -26,10 +26,7 @@ public class TransactionController {
     @RequestMapping(path= "/transactions", method = RequestMethod.POST)
     public ResponseEntity<Object> sendTransactions (Authentication authentication, @RequestBody TransferDTO transferDTO){
 
-        Account accountOrigin = accountRepository.findByNumber(transferDTO.getAccountOrigin());
-        Account accountDestination = accountRepository.findByNumber(transferDTO.getAccountDestination());
-        Double amount = transferDTO.getAmount();
-        String description = transferDTO.getDescription();
+
         if (transferDTO.getAccountOrigin().isBlank()){
             return new  ResponseEntity<>("Origin account is missing.", HttpStatus.FORBIDDEN);
         }
@@ -48,6 +45,10 @@ public class TransactionController {
         if (transferDTO.getAccountDestination().equals(transferDTO.getAccountOrigin())){
             return new ResponseEntity<>("The origin account and the destination account cannot be the same.", HttpStatus.FORBIDDEN);
         }
+        Account accountOrigin = accountRepository.findByNumber(transferDTO.getAccountOrigin());
+        Account accountDestination = accountRepository.findByNumber(transferDTO.getAccountDestination());
+        Double amount = transferDTO.getAmount();
+        String description = transferDTO.getDescription();
         if (accountOrigin == null){
             return new ResponseEntity<>("The origin account is not entered.", HttpStatus.FORBIDDEN);
         }
