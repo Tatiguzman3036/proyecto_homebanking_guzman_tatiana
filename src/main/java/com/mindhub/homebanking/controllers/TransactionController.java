@@ -1,6 +1,5 @@
 package com.mindhub.homebanking.controllers;
 
-import com.mindhub.homebanking.dtos.TransactionDTO;
 import com.mindhub.homebanking.dtos.TransferDTO;
 import com.mindhub.homebanking.models.*;
 import com.mindhub.homebanking.repositories.AccountRepository;
@@ -11,7 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
-
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.stream.Collectors;
@@ -33,35 +31,35 @@ public class TransactionController {
         Double amount = transferDTO.getAmount();
         String description = transferDTO.getDescription();
         if (transferDTO.getAccountOrigin().isBlank()){
-            return new  ResponseEntity<>("falto la cuenta de origen", HttpStatus.FORBIDDEN);
+            return new  ResponseEntity<>("Origin account is missing.", HttpStatus.FORBIDDEN);
         }
         if ( transferDTO.getAccountDestination().isBlank()) {
-            return new  ResponseEntity<>("falto la cuenta de destino", HttpStatus.FORBIDDEN);
+            return new  ResponseEntity<>("Destination account is missing.", HttpStatus.FORBIDDEN);
         }
-        if ( transferDTO.getAmount().isNaN()){
-            return new  ResponseEntity<>("falto el monto", HttpStatus.FORBIDDEN);
+        if (transferDTO.getAmount() == null) {
+            return new ResponseEntity<>("Amount is missing.", HttpStatus.FORBIDDEN);
         }
-        if (transferDTO.getAmount() < 1.0){
-            return new ResponseEntity<>("Fondos insuficientes", HttpStatus.FORBIDDEN);
+        if (transferDTO.getAmount() <= 0.0){
+            return new ResponseEntity<>("These amounts are not valid.", HttpStatus.FORBIDDEN);
         }
         if ( transferDTO.getDescription().isBlank()){
-            return new  ResponseEntity<>("falto la descripcion", HttpStatus.FORBIDDEN);
+            return new  ResponseEntity<>("Description is missing.", HttpStatus.FORBIDDEN);
         }
         if (transferDTO.getAccountDestination().equals(transferDTO.getAccountOrigin())){
-            return new ResponseEntity<>("las cuentas son iguales", HttpStatus.FORBIDDEN);
+            return new ResponseEntity<>("The origin account and the destination account cannot be the same.", HttpStatus.FORBIDDEN);
         }
         if (accountOrigin == null){
-            return new ResponseEntity<>("la cuenta de origen no existe", HttpStatus.FORBIDDEN);
+            return new ResponseEntity<>("The origin account is not entered.", HttpStatus.FORBIDDEN);
         }
         if (accountDestination == null){
-            return new ResponseEntity<>("la cuenta de destino no existe", HttpStatus.FORBIDDEN);
+            return new ResponseEntity<>("The destination account is not entered.", HttpStatus.FORBIDDEN);
         }
         Client client = clientRepository.findByEmail(authentication.getName());
         if (client.getAccounts().stream().filter(item -> item.getNumber().equals(transferDTO.getAccountOrigin())).collect(Collectors.toSet()).isEmpty()){
-            return new ResponseEntity<>("la cuenta está en uso" , HttpStatus.FORBIDDEN);
+            return new ResponseEntity<>("The origin account does not belong to the authenticated client.", HttpStatus.FORBIDDEN);
         }
         if (accountOrigin.getBalance() < transferDTO.getAmount() ){
-            return new ResponseEntity<>("la cuenta de origen no tiene fondos suficientes", HttpStatus.FORBIDDEN);
+            return new ResponseEntity<>("The origin account does not have sufficient funds.", HttpStatus.FORBIDDEN);
         }
         Transaction transaction = new Transaction(TransactionType.CREDIT,amount,transferDTO.getAccountOrigin() + description, LocalDateTime.now());
         Transaction transaction1 = new Transaction(TransactionType.DEBIT,Double.parseDouble("-" + amount),transferDTO.getAccountDestination() + description, LocalDateTime.now());
@@ -72,6 +70,6 @@ public class TransactionController {
         transactionRepository.save(transaction1);
         transactionRepository.save(transaction);
 
-        return new ResponseEntity<>("Transaccion realizada",HttpStatus.CREATED);
+        return new ResponseEntity<>("Transaction completed.",HttpStatus.CREATED);
     }
 }

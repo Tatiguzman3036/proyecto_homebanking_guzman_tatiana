@@ -35,7 +35,9 @@ const app = createApp({
             title: 'Are you sure to send this transaction?',
             showCancelButton: true,
             confirmButtonText: 'Yes',
+            confirmButtonColor: '#3085d6',
             cancelButtonText: 'No',
+            cancelButtonColor: '#d33',
             icon: 'question'
           }).then((result) => {
             if (result.isConfirmed) {
@@ -53,11 +55,10 @@ const app = createApp({
                 title: 'Transaction OK!',
                 showConfirmButton: false,
                 timer: 1500
-            })
-              /* setTimeout(()=>{
+            }),
+              setTimeout(()=>{
                 window.location.href = "accounts.html"
-              },1800) */
-              
+              },1800) 
               ).catch(error =>{
                 this.error1 = error.response.data
                 Swal.fire(`${this.error1}`,'error');
@@ -87,19 +88,22 @@ const app = createApp({
                 axios.post('http://localhost:8080/api/transactions', transferDTO)
                   .then(res => {
                     console.log(res);
-                    Swal.fire({
-                      position: 'center',
-                      title: 'Transaction OK!',
-                      showConfirmButton: false,
-                      timer: 1500
-                  })
-                    /* setTimeout(()=>{
-                      window.location.href = "accounts.html"
-                    },1800) */
-                  })
-                  .catch(error =>{
-                    Swal.fire('Invalid destination account', '', 'error');
-                    console.log(error)});
+                    if(res.status == 201){
+                      console.log(res);
+                      Swal.fire({
+                        position: 'center',
+                        title: 'Transaction OK!',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                      setTimeout(()=>{
+                        window.location.href = "accounts.html"
+                      },1800)
+                    }
+                    }).catch(error =>{
+                      this.error1 = error.response.data
+                  Swal.fire(`${this.error1}`,'error');
+                  console.log(error)});
               }
             });
           }
