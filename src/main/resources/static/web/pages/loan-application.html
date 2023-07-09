@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank "LA GUZMI"|Cards</title>
+    <link rel="shortcut icon" href="../images/la-guzmi.png" type="image/x-icon" />
+    <link rel="stylesheet" href="../css/loan-aplication.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous" />
+</head>
+<body>
+    <div id="app">
+        <header>
+            <nav class="navbar navbar-expand-lg m-2 rounded-2">
+                <div class="container-fluid">
+                  <a class="navbar-brand" href="#">
+                    <img class="imagennavbar" src="../images/la-guzmi.png" alt="" />
+                  </a>
+                  <button class="navbar-toggler"type="button"data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                  </button>
+                  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 gap-3 text-center">
+                      <li class="nav-item">
+                        <a class="nav-link text-white active" aria-current="page" href="./accounts.html">Home</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link text-white" href="./accounts2.html">Account</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link text-white" href="./card.html">Card</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link text-white" href="./transfer.html">Transfer</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link disabled text-white">Customer Support</a>
+                      </li>
+                      <div class=" d-flex justify-content-center align-items-center">
+                        <button type="button" class="buttonSignOut" @click="signOut()">Sign Out</button>
+                      </div>
+                    </ul>
+                  </div>
+                </div>
+              </nav>
+        </header>
+        <main>
+           <div  class="d-flex justify-content-center align-items-center">
+            <div class="card d-inline-block ">
+                <div class="card-body">
+                    <div >
+                        <h5>Select the type of loan</h5>
+                        <select id="idLoanType" name="type" v-model="loanDTO.idLoanType" class="form-select">
+                            <option v-for="loan of loans"  :value="loan.id">{{loan.loanName}} </option>
+                        </select>
+                    </div>
+                    <div >
+                        <h5>Available installments</h5>
+                        <select id="payments" name="option" v-model="loanDTO.payments" class="form-select" >
+                            <option v-for="option of paymentsOptions" :value="option">{{option}} </option>
+                        </select>
+                    </div>
+                    <label for="amount">The loan amount to request</label>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">$</span>
+                        <input type="number" id="amount" name="amount" v-model="loanDTO.amount" aria-label="Amount (to the nearest dollar)">
+                      </div>
+                    <div class=" mt-2">
+                        <h5>The destination account</h5>
+                        <select id="accountDestination" name="accountDestination" class="form-select" v-model="loanDTO.accountDestination">
+                            <option v-for="accounts of account" :value="accounts.number">{{accounts.number}} </option>
+                        </select>
+                      </div>
+                    <!-- <div >
+                        <h5 class="">The amount total: {{totalPayment}}</h5>
+                        <h4>The amount of each intallment: {{amountWithpayments}}</h4>
+                    </div> -->
+                    
+                </div >
+                <div class="d-flex justify-content-center m-1">
+                    <input type="submit" class="submit m-1 text-center" value="CREATE" @click="createdLoans()">
+                </div>
+            </div>
+           </div>
+            <div class="d-flex justify-content-around m-2">
+                <a class="text-decoration-none bg bg-white rounded-5 text-black" href="./card.html"> GO BACK<img class="imagenGoBack" src="../images/back.png" alt="back"> </a>
+            </div>
+        </main>
+        <footer class="bg-black m-2 rounded-2 text-center">
+            <h5 class="text-white">&copy Developed By : Tatiana Guzmán</h5>
+        </footer>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="../js/loan-aplication.js"></script>
+    <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+    crossorigin="anonymous"></script>
+</body>
+</html>

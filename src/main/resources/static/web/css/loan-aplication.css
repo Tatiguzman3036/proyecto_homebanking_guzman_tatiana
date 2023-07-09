@@ -1,0 +1,81 @@
+*{
+    padding: 0 !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+}
+body {
+    background-image: url(../images/54347.jpg) !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+}
+header {
+    min-height: 17vh !important;
+}
+main {
+    min-height: 74vh !important;
+}
+footer {
+    height: 5vh !important;
+}
+.ya{
+    width: 90vw !important;
+    border: 1px solid black !important;
+    border-radius: 10px;
+    background-color: rgba(46, 55, 63, 0.479);
+    font-size: 2rem !important;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+  } 
+.navbar {
+    background-color: #0f3c69!important;
+}
+.imagennavbar {
+    height: 15vh !important;
+    width: 10vw !important;
+}
+.buttonSignOut, .createdCardsbutton{
+  width: 130px;
+  height: 40px;
+  font-size: 1.1em;
+  cursor: pointer;
+  background-color: #171717;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  transition: all .4s;
+  margin-right: 0.5rem !important;
+}
+.createdCardsbutton{
+  background-color: #1d8308;
+}
+.p-else{
+  background-color: #14101094 !important;
+  border: 1px solid black !important;
+  border-radius: 10px !important;
+}
+.buttonSignOut:hover, .createdCardsbutton:hover{
+  border-radius: 5px;
+  transform: translateY(-10px);
+  box-shadow: 0 7px 0 -2px #f85959,
+   0 15px 0 -4px #39a2db,
+   0 16px 10px -3px #39a2db;
+}
+.buttonSignOut:active , .createdCardsbutton:active{
+  transition: all 0.2s;
+  transform: translateY(-5px);
+  box-shadow: 0 2px 0 -2px #f85959,
+   0 8px 0 -4px #39a2db,
+   0 12px 10px -3px #39a2db;
+}
+.navbar-collapse{
+   flex-grow: 0 !important;
+}
+.nav-item{
+  padding-top: 0.5rem !important;
+}
+.imagenGoBack{
+    width: 3vw !important;
+    height: 5vh !important;
+    background-color: #f8f4f4 !important;
+    border-radius: 20px !important;
+  }

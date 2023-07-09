@@ -5,6 +5,9 @@ import com.mindhub.homebanking.models.*;
 import com.mindhub.homebanking.repositories.AccountRepository;
 import com.mindhub.homebanking.repositories.ClientRepository;
 import com.mindhub.homebanking.repositories.TransactionRepository;
+import com.mindhub.homebanking.services.AccountService;
+import com.mindhub.homebanking.services.ClientService;
+import com.mindhub.homebanking.services.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,11 +20,11 @@ import java.util.stream.Collectors;
 @RestController @RequestMapping("/api")
 public class TransactionController {
     @Autowired
-    ClientRepository clientRepository;
+    private ClientService clientService;
     @Autowired
-    AccountRepository accountRepository;
+    private AccountService accountService;
     @Autowired
-    TransactionRepository transactionRepository;
+    private TransactionService transactionService;
     @Transactional
     @RequestMapping(path= "/transactions", method = RequestMethod.POST)
     public ResponseEntity<Object> sendTransactions (Authentication authentication, @RequestBody TransferDTO transferDTO){
@@ -45,8 +48,8 @@ public class TransactionController {
         if (transferDTO.getAccountDestination().equals(transferDTO.getAccountOrigin())){
             return new ResponseEntity<>("The origin account and the destination account cannot be the same.", HttpStatus.FORBIDDEN);
         }
-        Account accountOrigin = accountRepository.findByNumber(transferDTO.getAccountOrigin());
-        Account accountDestination = accountRepository.findByNumber(transferDTO.getAccountDestination());
+        Account accountOrigin = accountService.findByNumber(transferDTO.getAccountOrigin());
+        Account accountDestination = accountService.findByNumber(transferDTO.getAccountDestination());
         Double amount = transferDTO.getAmount();
         String description = transferDTO.getDescription();
         if (accountOrigin == null){
@@ -55,7 +58,7 @@ public class TransactionController {
         if (accountDestination == null){
             return new ResponseEntity<>("The destination account is not entered.", HttpStatus.FORBIDDEN);
         }
-        Client client = clientRepository.findByEmail(authentication.getName());
+        Client client = clientService.findByEmail(authentication.getName());
         if (client.getAccounts().stream().filter(item -> item.getNumber().equals(transferDTO.getAccountOrigin())).collect(Collectors.toSet()).isEmpty()){
             return new ResponseEntity<>("The origin account does not belong to the authenticated client.", HttpStatus.FORBIDDEN);
         }
@@ -68,8 +71,8 @@ public class TransactionController {
         accountDestination.setBalance(accountDestination.getBalance() + amount);
         accountDestination.addTransaction(transaction);
         accountOrigin.addTransaction(transaction1);
-        transactionRepository.save(transaction1);
-        transactionRepository.save(transaction);
+        transactionService.save(transaction1);
+        transactionService.save(transaction);
 
         return new ResponseEntity<>("Transaction completed.",HttpStatus.CREATED);
     }

@@ -4,8 +4,8 @@ import com.mindhub.homebanking.models.Card;
 import com.mindhub.homebanking.models.CardType;
 import com.mindhub.homebanking.models.Client;
 import com.mindhub.homebanking.models.ColorType;
-import com.mindhub.homebanking.repositories.CardRepository;
-import com.mindhub.homebanking.repositories.ClientRepository;
+import com.mindhub.homebanking.services.CardService;
+import com.mindhub.homebanking.services.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,14 +17,14 @@ import java.util.Random;
 @RestController @RequestMapping("/api")
 public class CardController {
     @Autowired
-    private CardRepository cardRepository;
+    private CardService cardService;
     @Autowired
-    private ClientRepository clientRepository;
+    private ClientService clientService;
 
     @RequestMapping(path = "/clients/current/cards", method = RequestMethod.POST)
     public ResponseEntity<Object> createCard(@RequestParam CardType type, @RequestParam ColorType color, Authentication authentication) {
 
-        Client client = clientRepository.findByEmail(authentication.getName());
+        Client client = clientService.findByEmail(authentication.getName());
         long cardLimit = client.getCards().stream().filter(card -> card.getType() == type).count();
         // Verificar si el cliente ya tiene 3 tarjetas del mismo tipo
         if (cardLimit >= 3) {
@@ -53,11 +53,11 @@ public class CardController {
                     }
                 }
                     cardNumber = cardNumberBuilder.toString();
-                     cardNumberUnique = cardRepository.existsByNumber(cardNumber);
+                     cardNumberUnique = cardService.existsByNumber(cardNumber);
             } while (cardNumberUnique);
                 Card card = new Card(client.getFirstName() + " " + client.getLastName(), type, color, cvv, LocalDateTime.now().plusYears(5), LocalDateTime.now(), cardNumber);
                 client.addCards(card);
-                cardRepository.save(card);
-                return new ResponseEntity<>(HttpStatus.CREATED);
+                cardService.save(card);
+                return new ResponseEntity<>("Account Created",HttpStatus.CREATED);
     }
 }

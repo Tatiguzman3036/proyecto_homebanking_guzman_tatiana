@@ -1,7 +1,7 @@
 package com.mindhub.homebanking;
 
 import com.mindhub.homebanking.models.*;
-import com.mindhub.homebanking.repositories.*;
+import com.mindhub.homebanking.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -24,7 +24,7 @@ public class  HomebankingApplication {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	@Bean
-	public CommandLineRunner initData (ClientRepository clientRepository, AccountRepository accountRepository, TransactionRepository transactionRepository, LoanRepository loanRepository, ClientLoanRepository clientLoanRepository,CardRepository cardRepository){
+	public CommandLineRunner initData (ClientService clientService, AccountService accountService, TransactionService transactionService, LoanService loanService, ClientLoanService clientLoanService, CardService cardService){
 		return args -> {
 
 			Client admin = new Client("admin","admin","admin@admin.com", passwordEncoder.encode("admin"));
@@ -42,41 +42,41 @@ public class  HomebankingApplication {
 			Transaction transaction04 = new Transaction(TransactionType.DEBIT, -1500.00,"Suship", LocalDateTime.now());
 
 			List<Integer> mortgageList = List.of(12,24,36,48,60);
-			Loan mortgage = new Loan("Mortgage", 500.000, mortgageList);
+			Loan mortgage = new Loan("Mortgage", 50000.0, mortgageList);
 			List<Integer> personalList = List.of(6,12,24);
-			Loan personal = new Loan("Personal", 100.000,personalList);
+			Loan personal = new Loan("Personal", 100000.0,personalList);
 			List<Integer> automotiveList = List.of(6,12,24,36);
-			Loan automotive = new Loan("Automotive", 300.000, automotiveList);
-			loanRepository.save(mortgage);
-			loanRepository.save(personal);
-			loanRepository.save(automotive);
+			Loan automotive = new Loan("Automotive", 300000.0, automotiveList);
+			loanService.save(mortgage);
+			loanService.save(personal);
+			loanService.save(automotive);
 			//AGREGO CLIENTES CON CLIENTLOAN::///
 			ClientLoan mortgageMelba = new ClientLoan(400000.0,60);
 			ClientLoan personalMelba = new ClientLoan(50000.0,12);
 			ClientLoan personalTatiana = new ClientLoan(100000.0,24);
 			ClientLoan automotiveTatiana = new ClientLoan(200000.0,36);
 
-			clientRepository.save(melba);
-			clientRepository.save(tatiana);
-			clientRepository.save(admin);
+			clientService.save(melba);
+			clientService.save(tatiana);
+			clientService.save(admin);
 			melba.addAccount(VIN001);
 			melba.addAccount(VIN002);
 			tatiana.addAccount(VIN003);
 			tatiana.addAccount(VIN004);
 
-			accountRepository.save(VIN001);
-			accountRepository.save(VIN002);
-			accountRepository.save(VIN003);
-			accountRepository.save(VIN004);
+			accountService.save(VIN001);
+			accountService.save(VIN002);
+			accountService.save(VIN003);
+			accountService.save(VIN004);
 
 			VIN001.addTransaction(transaction01);
 			VIN001.addTransaction(transaction02);
 			VIN002.addTransaction(transaction03);
 			VIN002.addTransaction(transaction04);
-			transactionRepository.save(transaction01);
-			transactionRepository.save(transaction02);
-			transactionRepository.save(transaction03);
-			transactionRepository.save(transaction04);
+			transactionService.save(transaction01);
+			transactionService.save(transaction02);
+			transactionService.save(transaction03);
+			transactionService.save(transaction04);
 
 
 //			loanRepository.save(loanMelba);//
@@ -91,10 +91,10 @@ public class  HomebankingApplication {
 //			personal.addClientLoan(personalTatiana);
 //			tatiana.addClientLoan(automotiveTatiana);
 //			automotive.addClientLoan(automotiveTatiana);
-			clientLoanRepository.save(mortgageMelba);
-			clientLoanRepository.save(personalMelba);
-			clientLoanRepository.save(personalTatiana);
-			clientLoanRepository.save(automotiveTatiana);
+			clientLoanService.save(mortgageMelba);
+			clientLoanService.save(personalMelba);
+			clientLoanService.save(personalTatiana);
+			clientLoanService.save(automotiveTatiana);
 			Card gold = new Card(melba.getFirstName()+ " "+ melba.getLastName(), CardType.DEBIT,ColorType.GOLD, 750,LocalDateTime.now().plusYears(5),LocalDateTime.now(),"5541-7685-9210-0016");
 			Card titanium = new Card(melba.getFirstName()+ " "+ melba.getLastName(),CardType.CREDIT,ColorType.TITANIUM,698,LocalDateTime.now().plusYears(5),LocalDateTime.now(),"1918-4645-7070-0302");
 			Card silver = new Card(melba.getFirstName()+" "+ melba.getLastName(), CardType.CREDIT,ColorType.SILVER,711,LocalDateTime.now().plusYears(5),LocalDateTime.now(),"5578-2588-4091-3036");
@@ -102,9 +102,9 @@ public class  HomebankingApplication {
 			melba.addCards(gold);
 			melba.addCards(titanium);
 			melba.addCards(silver);
-			cardRepository.save(gold);
-			cardRepository.save(titanium);
-			cardRepository.save(silver);
+			cardService.save(gold);
+			cardService.save(titanium);
+			cardService.save(silver);
 //			tatiana.addCards(silver);
 //			cardRepository.save(silver);
 		};

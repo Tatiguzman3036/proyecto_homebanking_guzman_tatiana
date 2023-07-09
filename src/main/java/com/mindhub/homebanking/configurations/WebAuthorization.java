@@ -5,7 +5,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.WebAttributes;
 import org.springframework.security.web.authentication.logout.HttpStatusReturningLogoutSuccessHandler;
@@ -19,14 +18,18 @@ import javax.servlet.http.HttpSession;
 class WebAuthorization {
 
     @Bean
-    protected SecurityFilterChain filterchain (HttpSecurity http) throws Exception {
+    protected SecurityFilterChain filterChain (HttpSecurity http) throws Exception {
 
         http.authorizeRequests()
                 .antMatchers("/web/index.html", "/web/pages/login.html").permitAll()
                 .antMatchers(HttpMethod.POST,"/api/login", "api/clients").permitAll()
-                .antMatchers(HttpMethod.POST,"/api/clients/current/accounts","/api/clients/current/cards", "/api/transactions").hasAuthority("CLIENT")
+                .antMatchers(HttpMethod.POST,"/api/clients/current/accounts","/api/clients/current/cards",
+                        "/api/transactions", "/api/loans").hasAuthority("CLIENT")
                 .antMatchers("/web/manager.html", "/rest/**","/h2-console/**").hasAuthority("ADMIN")
-                .antMatchers("/web/pages/account.html","/web/pages/accounts.html","/web/pages/card.html","/api/clients/current/accounts","/web/pages/transfer.html").hasAuthority("CLIENT");
+                .antMatchers("/api/loans","/api/clients/current/accounts").hasAuthority("CLIENT")
+                .antMatchers("/web/pages/account.html","/web/pages/accounts.html","/web/pages/card.html","/web/pages/accounts2.html"
+                        ,"/web/pages/transfer.html","/web/pages/loan-application.html","/web/pages/createdCard.html").hasAuthority("CLIENT");
+//                .anyRequest().denyAll();
 
 
         http.formLogin()
