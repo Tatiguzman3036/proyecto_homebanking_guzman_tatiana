@@ -10,20 +10,44 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
 </head>
 <body>
-    <header>
-        <nav class="navbar">
-            <div class="container">
-              <a class="navbar-brand" href="#">
-                <img src="../web/images/la-guzmi.png" class="imagennavbar" alt="Bootstrap" width="30" height="24">
-              </a>
-            </div>
+  <header>
+    <nav class="navbar navbar-expand-lg m-2 rounded-2">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+          <img class="imagennavbar" src="../web/images/la-guzmi.png" alt="" />
+        </a>
+        <button class="navbar-toggler"type="button"data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0 gap-3 text-center">
+            <li class="nav-item">
+              <a class="nav-link text-white active" aria-current="page" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" href="./pages/account.html">Account</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" href="./pages/card.html">Card</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" href="./pages/transfer.html">Transfer</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link disabled text-white">Customer Support</a>
+            </li>
             <div class=" d-flex justify-content-center align-items-center">
-                <a href="../web/pages/login.html" class="buttonSignOut text-center text-decoration-none">Log in/Register</a>
-              </div>
-          </nav>
-    </header>
+              <button type="button" class="buttonSignOut" @click="signOut()">Sign Out</button>
+            </div>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
     <main>
-      <img src="./images/imagen-index.png" alt="">
+      <div class="d-flex justify-content-center p-lg-5">
+        <img class="imagenprincipal" src="./images/imagen-index.png" alt="">
+      </div>
     </main>
     <footer class="bg-black m-2 rounded-2 text-center">
         <h5 class="text-white">&copy Developed By : Tatiana Guzmán</h5>

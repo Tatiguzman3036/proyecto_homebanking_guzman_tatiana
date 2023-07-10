@@ -54,7 +54,8 @@ const app = createApp({
                 position: 'center',
                 title: 'Transaction OK!',
                 showConfirmButton: false,
-                timer: 1500
+                timer: 1500,
+
             }),
               setTimeout(()=>{
                 window.location.href = "accounts.html"
@@ -64,6 +65,7 @@ const app = createApp({
                 Swal.fire(`${this.error1}`,'error');
                 console.log(error)})
                 }})
+                .catch(err => console.log(err));
         },
         makeTransfer1() {
             const currentClientAccounts = this.account.map(acc => acc.number);
@@ -76,7 +78,7 @@ const app = createApp({
               showCancelButton: true,
               confirmButtonText: 'Yes',
               cancelButtonText: 'No',
-              icon: 'question'
+              icon: 'warning',
             }).then((result) => {
               if (result.isConfirmed) {
                 const transferDTO = {
@@ -102,7 +104,9 @@ const app = createApp({
                     }
                     }).catch(error =>{
                       this.error1 = error.response.data
-                  Swal.fire(`${this.error1}`,'error');
+                  Swal.fire(
+                    `${this.error1}`);
+                    
                   console.log(error)})
                     
                   }})
