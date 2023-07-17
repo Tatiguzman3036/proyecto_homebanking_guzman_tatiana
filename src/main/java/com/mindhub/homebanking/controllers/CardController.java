@@ -6,6 +6,7 @@ import com.mindhub.homebanking.models.Client;
 import com.mindhub.homebanking.models.ColorType;
 import com.mindhub.homebanking.services.CardService;
 import com.mindhub.homebanking.services.ClientService;
+import com.mindhub.homebanking.utils.CardUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +22,7 @@ public class CardController {
     @Autowired
     private ClientService clientService;
 
-    @RequestMapping(path = "/clients/current/cards", method = RequestMethod.POST)
+    @PostMapping(path = "/clients/current/cards")
     public ResponseEntity<Object> createCard(@RequestParam CardType type, @RequestParam ColorType color, Authentication authentication) {
 
         Client client = clientService.findByEmail(authentication.getName());
@@ -37,27 +38,17 @@ public class CardController {
         }
             // Generar número de tarjeta único
             String cardNumber = " ";
-            boolean cardNumberUnique;
-            int cvv;
             Random random = new Random();
-            do {
-                StringBuilder cardNumberBuilder = new StringBuilder();
-                cvv = random.nextInt(999);
-                for (int i = 0; i < 4; i++) {
-                    for (int j = 0; j < 4; j++) {
-                        int digit = random.nextInt(10);
-                        cardNumberBuilder.append(digit);
-                    }
-                    if (i < 3) {
-                        cardNumberBuilder.append("-");
-                    }
-                }
-                    cardNumber = cardNumberBuilder.toString();
-                     cardNumberUnique = cardService.existsByNumber(cardNumber);
-            } while (cardNumberUnique);
+        int cvv = CardUtils.getCvv(random);
+        do {
+            cardNumber = CardUtils.getStringBuilder(random).toString();
+        } while ( cardService.existsByNumber(cardNumber));
                 Card card = new Card(client.getFirstName() + " " + client.getLastName(), type, color, cvv, LocalDateTime.now().plusYears(5), LocalDateTime.now(), cardNumber);
                 client.addCards(card);
                 cardService.save(card);
                 return new ResponseEntity<>("Account Created",HttpStatus.CREATED);
     }
+
+
+
 }

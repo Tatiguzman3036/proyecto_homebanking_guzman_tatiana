@@ -26,7 +26,7 @@ public class TransactionController {
     @Autowired
     private TransactionService transactionService;
     @Transactional
-    @RequestMapping(path= "/transactions", method = RequestMethod.POST)
+    @PostMapping(path= "/transactions")
     public ResponseEntity<Object> sendTransactions (Authentication authentication, @RequestBody TransferDTO transferDTO){
 
 
