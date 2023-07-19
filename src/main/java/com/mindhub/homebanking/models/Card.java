@@ -4,6 +4,7 @@ import net.minidev.json.annotate.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -16,16 +17,17 @@ public class Card {
     private CardType type;
     private ColorType color;
     private int cvv;
-    private LocalDateTime thruDate;
-    private LocalDateTime fromDate;
+    private LocalDate thruDate;
+    private LocalDate fromDate;
     private String number;
+    private Boolean status;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "client_id")
     private Client client;
 
     public Card() { }
 
-    public Card(String cardholder, CardType type, ColorType color, int cvv, LocalDateTime thruDate, LocalDateTime fromDate,String number) {
+    public Card(String cardholder, CardType type, ColorType color, int cvv, LocalDate thruDate, LocalDate fromDate,String number) {
         this.cardholder = cardholder;
         this.type = type;
         this.color = color;
@@ -73,11 +75,11 @@ public class Card {
         this.cvv = cvv;
     }
 
-    public LocalDateTime getThruDate() {
+    public LocalDate getThruDate() {
         return thruDate;
     }
 
-    public void setThruDate(LocalDateTime thruDate) {
+    public void setThruDate(LocalDate thruDate) {
         this.thruDate = thruDate;
     }
 
@@ -85,11 +87,11 @@ public class Card {
 
     public void setNumber(String number) {this.number = number;}
 
-    public LocalDateTime getFromDate() {
+    public LocalDate getFromDate() {
         return fromDate;
     }
 
-    public void setFromDate(LocalDateTime fromDate) {
+    public void setFromDate(LocalDate fromDate) {
         this.fromDate = fromDate;
     }
     @JsonIgnore
@@ -100,4 +102,13 @@ public class Card {
     public void setClient(Client client) {
         this.client = client;
     }
+
+    public Boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(Boolean status) {
+        this.status = status;
+    }
+
 }

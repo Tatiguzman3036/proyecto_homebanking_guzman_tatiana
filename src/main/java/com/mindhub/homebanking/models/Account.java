@@ -19,6 +19,7 @@ public class Account {
     private String number;
     private LocalDate creationDate;
     private double balance;
+    private boolean hidden;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "client_id")
     private Client client;
@@ -26,10 +27,11 @@ public class Account {
     private Set<Transaction> transactions = new HashSet<>();
     public Account() {
     }
-    public Account(String number, LocalDate creationDate, double balance) {
+    public Account(String number, LocalDate creationDate, double balance,boolean hidden) {
         this.number = number;
         this.creationDate = creationDate;
         this.balance = balance;
+        this.hidden = hidden;
     }
 
     public void addTransaction (Transaction transaction){
@@ -79,6 +81,15 @@ public class Account {
     public Client getClient() { return client; }
 
     public void setClient(Client client) { this.client = client; }
+
+    public boolean getHidden() {
+        return hidden;
+    }
+
+    public void setHidden(boolean hidden) {
+        this.hidden = hidden;
+    }
+
     @Override
     public String toString() {
         return "Account{" +

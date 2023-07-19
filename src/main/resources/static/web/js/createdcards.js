@@ -11,13 +11,27 @@ const app = createApp({
     },
     methods:{
         createdCards(){
-            console.log(this.type , this.color);
             axios.post('/api/clients/current/cards',`type=${this.type}&color=${this.color}`)
             .then(res =>{
-                console.log("hola");
-                console.log(res);
-                window.location.href= '/web/pages/card.html'
-            }).catch(err=> console.log(err))
+                if(res.status == 201){
+                    console.log(res);
+                    Swal.fire({
+                        icon: 'success',
+                      position: 'center',
+                      title: 'Card Created',
+                      showConfirmButton: false,
+                      timer: 1500
+                  })
+                    setTimeout(()=>{
+                      window.location.href = "/web/pages/card.html"
+                    },1800)
+                  }
+            }) .catch(error => {
+                this.error1 = error.response.data
+            Swal.fire({
+                icon:'error',
+                title: `${this.error1}`});
+            console.log(error)});
         },
         signOut(){
             axios.post('/api/logout')

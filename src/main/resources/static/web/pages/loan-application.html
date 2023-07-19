@@ -13,7 +13,7 @@
 <body>
     <div id="app">
         <header>
-            <nav class="navbar navbar-expand-lg m-2 rounded-2">
+            <nav class="navbar navbar-expand-lg">
                 <div class="container-fluid">
                   <a class="navbar-brand" href="#">
                     <img class="imagennavbar" src="../images/la-guzmi.png" alt="" />
@@ -23,11 +23,11 @@
                   </button>
                   <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 gap-3 text-center">
+                      <!-- <li class="nav-item">
+                        <a class="nav-link text-white active" aria-current="page" href="../index.html">Homepage</a>
+                      </li> -->
                       <li class="nav-item">
-                        <a class="nav-link text-white active" aria-current="page" href="./accounts.html">Home</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link text-white" href="./accounts2.html">Account</a>
+                        <a class="nav-link text-white" href="./accounts.html">Account</a>
                       </li>
                       <li class="nav-item">
                         <a class="nav-link text-white" href="./card.html">Card</a>
@@ -47,44 +47,60 @@
               </nav>
         </header>
         <main>
-           <div  class="d-flex justify-content-center align-items-center">
-            <div class="card d-inline-block ">
+          <section>
+            <h2 class=" text-center">Please select the loan you wish to apply for:</h2>
+          </section>
+           <div  class="d-flex justify-content-center align-items-center mt-1">
+            <div class="card d-inline-block w-50">
                 <div class="card-body">
                     <div >
-                        <h5>Select the type of loan</h5>
+                        <h5 class="text-white text-center">Select the type of loan</h5>
                         <select id="idLoanType" name="type" v-model="loanDTO.idLoanType" class="form-select">
                             <option v-for="loan of loans"  :value="loan.id">{{loan.loanName}} </option>
                         </select>
                     </div>
                     <div >
-                        <h5>Available installments</h5>
+                        <h5 class="text-white text-center">Available installments</h5>
                         <select id="payments" name="option" v-model="loanDTO.payments" class="form-select" >
                             <option v-for="option of paymentsOptions" :value="option">{{option}} </option>
                         </select>
                     </div>
-                    <label for="amount">The loan amount to request</label>
+                    <label for="amount" class="text-white text-center fs-5 text">The loan amount to request</label>
                     <div class="input-group mb-3">
-                        <span class="input-group-text">$</span>
-                        <input type="number" id="amount" name="amount" v-model="loanDTO.amount" aria-label="Amount (to the nearest dollar)">
+                        <span class="input-group-text w-25"><strong>$</strong></span>
+                        <input type="number" class="w-75" id="amount" name="amount" v-model="loanDTO.amount" aria-label="Amount (to the nearest dollar)">
                       </div>
                     <div class=" mt-2">
-                        <h5>The destination account</h5>
+                        <h5 class="text-white text-center">The destination account</h5>
                         <select id="accountDestination" name="accountDestination" class="form-select" v-model="loanDTO.accountDestination">
                             <option v-for="accounts of account" :value="accounts.number">{{accounts.number}} </option>
                         </select>
                       </div>
                 </div >
                 <div class="d-flex justify-content-center m-1">
-                    <input type="submit" class="submit m-1 text-center" value="CREATE" @click="createdLoans()">
+                    <input class="submit m-1 text-center" value="CREATE" @click="createdLoans()">
                 </div>
             </div>
            </div>
             <div class="d-flex justify-content-around m-2">
-                <a class="text-decoration-none bg bg-white rounded-5 text-black" href="./card.html"> GO BACK<img class="imagenGoBack" src="../images/back.png" alt="back"> </a>
+                <a class="text-decoration-none bg bg-white rounded-5 text-black" href="./accounts.html"> GO BACK<img class="imagenGoBack" src="../images/back.png" alt="back"> </a>
             </div>
         </main>
-        <footer class="bg-black m-2 rounded-2 text-center">
-            <h5 class="text-white">&copy Developed By : Tatiana Guzmán</h5>
+        <footer class=" pt-2 d-flex justify-content-around align-items-center flex-wrap">
+          <section class=" d-flex flex-column flex-wrap ">
+                <div>
+                  <h5 class="text-white text-center">Contact Us:</h5>
+                </div>
+            <div class="d-flex flex-wrap gap-2">
+                <i class="bi bi-telephone-fill"><a href="tel:0810-220-8466" class="ms-2 text-decoration-none text-white">TEL: 11-4560-8975</a></i>
+                <i class="bi bi-envelope"><a href="mailto:homebankingLaGuzmi@laguzmi.com"
+                        class="ms-2 text-decoration-none text-white">E-MAIL: homebankingLaGuzmi@laguzmi.com</a></i>
+                <i class="bi bi-geo-alt-fill"><a href="" class="ms-2 text-decoration-none text-white">ADRESS: Paraguay 5533</a></i>
+            </div>
+          </section>
+          <div class="">
+            <h5 class="text-white text-center m-0">&copy Developed By : Tatiana Guzmán</h5>
+          </div>
         </footer>
       </div>
       <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

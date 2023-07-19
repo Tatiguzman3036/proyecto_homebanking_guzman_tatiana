@@ -11,7 +11,7 @@
 <body>
     <div id="app">
         <header>
-            <nav class="navbar navbar-expand-lg m-2 rounded-2">
+            <nav class="navbar navbar-expand-lg">
                 <div class="container-fluid">
                   <a class="navbar-brand" href="#">
                     <img class="imagennavbar" src="../images/la-guzmi.png" alt="" />
@@ -21,11 +21,11 @@
                   </button>
                   <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 gap-3 text-center">
+                      <!-- <li class="nav-item">
+                        <a class="nav-link text-white active" aria-current="page" href="../index.html">Homepage</a>
+                      </li> -->
                       <li class="nav-item">
-                        <a class="nav-link text-white active" aria-current="page" href="./accounts.html">Home</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link text-white" href="./accounts2.html">Account</a>
+                        <a class="nav-link text-white" href="./accounts.html">Account</a>
                       </li>
                       <li class="nav-item">
                         <a class="nav-link text-white" href="./card.html">Card</a>
@@ -45,10 +45,15 @@
               </nav>
         </header>
         <main>
-           <div  class="d-flex justify-content-center align-items-center">
+          <section>
+            <h2 class=" text-center">Please select the card you want to create:</h2>
+          </section>
+           <div class="d-flex justify-content-center align-items-center">
             <div class="card d-inline-block ">
                 <div class="card-body">
+                  <div class="d-flex justify-content-center">
                     <img class="imgCards" src="../images/Sin_título001-removebg-preview.png" alt="">
+                  </div>
                     <div >
                         <h5 class="text-white">Select the type of card</h5>
                         <select id="type" v-model="type" class="form-select">
@@ -71,13 +76,27 @@
             </div>
            </div>
             <div class="d-flex justify-content-around m-2">
-                <a class="text-decoration-none bg bg-white rounded-5 text-black" href="./card.html"> GO BACK<img class="imagenGoBack" src="../images/back.png" alt="back"> </a>
+                <a class="text-decoration-none bg bg-white rounded-5 text-black shadow" href="./card.html"> GO BACK<img class="imagenGoBack" src="../images/back.png" alt="back"> </a>
             </div>
         </main>
-        <footer class="bg-black m-2 rounded-2 text-center">
-            <h5 class="text-white">&copy Developed By : Tatiana Guzmán</h5>
+        <footer class=" pt-2 d-flex justify-content-around align-items-center flex-wrap">
+          <section class=" d-flex flex-column flex-wrap ">
+                <div>
+                  <h5 class="text-white text-center">Contact Us:</h5>
+                </div>
+            <div class="d-flex flex-wrap gap-2">
+                <i class="bi bi-telephone-fill"><a href="tel:0810-220-8466" class="ms-2 text-decoration-none text-white">TEL: 11-4560-8975</a></i>
+                <i class="bi bi-envelope"><a href="mailto:homebankingLaGuzmi@laguzmi.com"
+                        class="ms-2 text-decoration-none text-white">E-MAIL: homebankingLaGuzmi@laguzmi.com</a></i>
+                <i class="bi bi-geo-alt-fill"><a href="" class="ms-2 text-decoration-none text-white">ADRESS: Paraguay 5533</a></i>
+            </div>
+          </section>
+          <div class="">
+            <h5 class="text-white text-center m-0">&copy Developed By : Tatiana Guzmán</h5>
+          </div>
         </footer>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script src="../js/createdcards.js"></script>

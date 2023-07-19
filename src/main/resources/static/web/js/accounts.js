@@ -8,36 +8,55 @@ const app = createApp({
             loan:[],
             card:[],
             createdAccounts:[],
+            id:""
         }
     },
     created(){
-        this.loadData()
+        this.loadData();
+        this.loadData1()
     },
     methods:{
         loadData(){
-            axios.get("http://localhost:8080/api/clients/current")
+            axios.get("/api/clients/current")
             .then(res => {
                 this.client = res.data
                 console.log(this.client);
-                this.account = res.data.accounts;
-                this.account.sort((itemA, itemB)=> itemA.id - itemB.id)
-                console.log(this.account);
+                /* this.account = res.data.accounts;
+                this.account.sort((itemA, itemB)=> itemA.id - itemB.id).filter(account => account.hidden !== true)
+                console.log(this.account); */
                 this.loan= res.data.loans
                 this.loan.sort((itemA,itemB) => itemA.id - itemB.id)
                 console.log(this.loan);
-                this.card = this.client.cards;
-                this.card((itemA,itemB) => itemA.id - itemB.id)
-                console.log(this.card);
-                
+            })
+            .catch(error => console.log(error))
+        },
+        loadData1(){
+            axios.get("/api/clients/accounts")
+            .then(res => {
+                /* this.client = res.data
+                console.log(this.client); */
+                this.account = res.data;
+                this.account.sort((itemA, itemB)=> itemA.id - itemB.id).filter(account => account.hidden !== true)
+                console.log(res);
             })
             .catch(error => console.log(error))
         },
         created(){
-            axios.post("http://localhost:8080/api/clients/current/accounts")
+            axios.post("/api/clients/current/accounts")
             .then(res => {
                     this.loadData()
-                    this.createdAccounts = res
-                
+                    if(res.status == 201){
+                        console.log(res);
+                        Swal.fire({
+                          position: 'center',
+                          title: 'Account Created',
+                          showConfirmButton: false,
+                          timer: 1500
+                      })
+                        setTimeout(()=>{
+                          window.location.href = "accounts.html"
+                        },1800)
+                      }
             }).catch(error =>
                 console.log(error))
         },
@@ -50,6 +69,18 @@ const app = createApp({
                 return 'titanium'
             }
             
+        },
+        deleteAccount(id){
+            this.id = id
+            axios.patch(`/api/accounts/${this.id}/hidden`)
+              .then(response => {
+                console.log(response.data);
+                location.reload()
+                this.account.filter(account => account.id !== id);
+              })
+              .catch(error => {
+                console.error(error.response.data)
+            });
         },
         signOut(){
             axios.post('/api/logout')

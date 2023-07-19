@@ -6,13 +6,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Bank "LA GUZMI"|home</title>
   <link rel="shortcut icon" href="../images/la-guzmi.png" type="image/x-icon" />
-  <link rel="stylesheet" href="../css/style-acc.css" />
+  <link rel="stylesheet" href="../css/acounts.css" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous" />
 </head>
 <body >
   <div id="app">
   <header>
-    <nav class="navbar navbar-expand-lg m-2 rounded-2">
+    <nav class="navbar navbar-expand-lg">
       <div class="container-fluid   ">
         <a class="navbar-brand" href="#">
           <img class="imagennavbar" src="../images/la-guzmi.png" alt="" />
@@ -22,11 +22,11 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0 gap-3 text-center   d-flex  justify-content-end">
+            <!-- <li class="nav-item">
+              <a class="nav-link text-white active" aria-current="page" href="../index.html">Homepage</a>
+            </li> -->
             <li class="nav-item">
-              <a class="nav-link text-white active" aria-current="page" href="#">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-white" href="./accounts2.html">Account</a>
+              <a class="nav-link text-white  border border-end-0 border-top-0 border-white" href="#">Account</a>
             </li>
             <li class="nav-item">
               <a class="nav-link text-white" href="./card.html">Card</a>
@@ -48,14 +48,18 @@
     </nav>
   </header>
   <main>
-    <div class="d-flex justify-content-center">
+    <section class="">
       <h3 class="d-flex flex-column align-items-center m-2 text-white ya">Welcome {{client.firstName}} {{client.lastName}}!</h3>
-    </div>
-    <div class="d-flex"  v-if="account.length < 3">
+    </section>
+    <div class=""  v-if="account.length < 3">
+      <div class="m-2 d-flex justify-content-end">
+        <button class="buttonCreatedAccount" @click="created()">Created Account</button>
+      </div>
+      <div>
         <h3 class="d-flex justify-content-center align-items-center ya m-2 text-white">Your Accounts:</h3>
-          <button class="buttonCreatedAccount" @click="created()">Created Account</button>
+      </div>
     </div>
-    <div class="d-flex" v-else>
+    <div class="" v-else>
       <h3 class="d-flex justify-content-center align-items-center ya m-2 text-white">Your Accounts:</h3>
   </div>
     <div class="d-flex flex-wrap justify-content-around">
@@ -79,6 +83,9 @@
               </div>
             </div>
           </div>
+        </div>
+        <div>
+          <button class="bd bg-success" @click="deleteAccount(accounts.id)">Delet account</button>
         </div>
       </div>
     </div>
@@ -109,10 +116,47 @@
       <h3 class="text-center text-white pt-5">At the moment you do not have loans made in the Bank...</h3>
     </div>
   </main>
-  <footer class="bg-black m-2 rounded-2 text-center">
-    <h5 class="text-white">&copy Developed By : Tatiana Guzmán</h5>
+  <footer class=" pt-2 d-flex justify-content-around align-items-center flex-wrap">
+    <div class=" flex-wrap">
+      <ul class="ps-5">
+        <h5 class="text-white">Follow us on our accounts:</h5>
+        <li>
+          <a class="d-flex align-items-center m-1" target="_blank" href="https://es-la.facebook.com/">
+            <img class=" icono shadow bg bg-white rounded-2 " src="../images/fb.png" alt="Logo de Facebook">
+            <p class="text-white m-0 text-decoration-none">|La Guzmi Fb</p>
+          </a>
+        </li>
+        <li>
+          <a class="d-flex align-items-center m-1" target="_blank"  href="https://ar.linkedin.com/?original_referer=https%3A%2F%2Fwww.google.com%2F">
+            <img class=" icono2 bg bg-white rounded-2 " src="../images/in.png" alt="Lode de wpp">
+            <p class="text-white m-0 text-decoration-none">|LaGuzmiLinkedin</p>
+          </a>
+        </li>
+        <li>
+          <a class="d-flex align-items-center m-1" target="_blank" href="https://www.instagram.com/">
+            <img class=" icono2 bg bg-white rounded-2 " src="../images/instagram.png" alt="Lode de ig">
+            <p class="text-white m-0 text-decoration-none">|La Guzmi Ig</p>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <section class=" d-flex flex-column flex-wrap ">
+      <div>
+        <h5 class="text-white text-center">Contact Us:</h5>
+      </div>
+      <div class="d-flex flex-wrap gap-2">
+        <i class="bi bi-telephone-fill"><a href="tel:0810-220-8466" class="ms-2 text-decoration-none text-white">TEL: 11-4560-8975</a></i>
+        <i class="bi bi-envelope"><a href="mailto:homebankingLaGuzmi@laguzmi.com"
+            class="ms-2 text-decoration-none text-white">E-MAIL: homebankingLaGuzmi@laguzmi.com</a></i>
+        <i class="bi bi-geo-alt-fill"><a href="" class="ms-2 text-decoration-none text-white">ADRESS: Paraguay 5533</a></i>
+      </div>
+    </section>
+    <div class="">
+      <h5 class="text-white text-center m-0">&copy Developed By : Tatiana Guzmán</h5>
+    </div>
   </footer>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script src="../js/accounts.js"></script>

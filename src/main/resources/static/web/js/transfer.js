@@ -21,6 +21,11 @@ const app = createApp({
             console.log(this.account);
         }).catch(error => console.log(error))
     },
+    computed:{
+      accountsExceptSelected(){
+        return this.account.filter(account => account.number !== this.transferDTO.accountOrigin)
+      }
+    },
     methods:{
         signOut(){
             axios.post('/api/logout')
@@ -30,7 +35,27 @@ const app = createApp({
             }).catch(error => console.log(error))
         },
         makeTransfer(){
-            /* console.log(this.transferDTO.amount, this.transferDTO.accountDestination, this.transferDTO.accountOrigin, this.transferDTO.description); */
+          if (this.transferDTO.amount === null && this.transferDTO.accountOrigin.length === 0 && this.transferDTO.accountDestination.length === 0 && this.transferDTO.description.length === 0) {
+            Swal.fire({
+              icon:'error',
+              title: 'The data entered is incorrect, please re-enter it!'});
+          }else if (this.transferDTO.amount === null && this.transferDTO.accountOrigin.length !== 0 && this.transferDTO.accountDestination.length !== 0 && this.transferDTO.description.length !== 0) {
+            Swal.fire({
+              icon:'error',
+              title: 'The amount is missing!'});
+          }else if (this.transferDTO.amount !== null && this.transferDTO.accountOrigin.length === 0 && this.transferDTO.accountDestination.length !== 0 && this.transferDTO.description.length !== 0) {
+            Swal.fire({
+              icon:'error',
+              title: 'The account origin is missing!'});
+          }else if (this.transferDTO.amount !== null && this.transferDTO.accountOrigin.length !== 0 && this.transferDTO.accountDestination.length === 0 && this.transferDTO.description.length !== 0) {
+            Swal.fire({
+              icon:'error',
+              title: 'The account destination is missing!'});
+          }else if (this.transferDTO.amount !== null && this.transferDTO.accountOrigin.length !== 0 && this.transferDTO.accountDestination.length !== 0 && this.transferDTO.description.length === 0) {
+            Swal.fire({
+              icon:'error',
+              title: 'The description is missing!'});
+          }else{
            Swal.fire({
             title: 'Are you sure to send this transaction?',
             showCancelButton: true,
@@ -65,9 +90,30 @@ const app = createApp({
                 Swal.fire(`${this.error1}`,'error');
                 console.log(error)})
                 }})
-                .catch(err => console.log(err));
+                .catch(err => console.log(err));}
         },
         makeTransfer1() {
+          if (this.transferDTO.amount === null && this.transferDTO.accountOrigin.length === 0 && this.transferDTO.accountDestination.length === 0 && this.transferDTO.description.length === 0) {
+            Swal.fire({
+              icon:'error',
+              title: 'The data entered is incorrect, please re-enter it!'});
+          }else if (this.transferDTO.amount === null && this.transferDTO.accountOrigin.length !== 0 && this.transferDTO.accountDestination.length !== 0 && this.transferDTO.description.length !== 0) {
+            Swal.fire({
+              icon:'error',
+              title: 'The amount is missing!'});
+          }else if (this.transferDTO.amount !== null && this.transferDTO.accountOrigin.length === 0 && this.transferDTO.accountDestination.length !== 0 && this.transferDTO.description.length !== 0) {
+            Swal.fire({
+              icon:'error',
+              title: 'The account origin is missing!'});
+          }else if (this.transferDTO.amount !== null && this.transferDTO.accountOrigin.length !== 0 && this.transferDTO.accountDestination.length === 0 && this.transferDTO.description.length !== 0) {
+            Swal.fire({
+              icon:'error',
+              title: 'The account destination is missing!'});
+          }else if (this.transferDTO.amount !== null && this.transferDTO.accountOrigin.length !== 0 && this.transferDTO.accountDestination.length !== 0 && this.transferDTO.description.length === 0) {
+            Swal.fire({
+              icon:'error',
+              title: 'The description is missing!'});
+          }else{
             const currentClientAccounts = this.account.map(acc => acc.number);
             if (currentClientAccounts.includes(this.transferDTO.accountDestination)) {
               Swal.fire('Invalid destination account', '', 'error');
@@ -111,7 +157,7 @@ const app = createApp({
                     
                   }})
                   .catch(err => console.log(err));
-              
+                }
           }
           
           

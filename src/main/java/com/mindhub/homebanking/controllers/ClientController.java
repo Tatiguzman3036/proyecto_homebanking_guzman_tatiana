@@ -61,7 +61,7 @@ public class ClientController {
             Random random = new Random();
             randomNumber = "VIN-" + random.nextInt(99999999) + 10000000;
         }while (accountService.findByNumber(randomNumber) != null);
-        Account account = new Account(randomNumber, LocalDate.now(), 0.0);
+        Account account = new Account(randomNumber, LocalDate.now(), 0.0,true);
         account.setClient(client);
         accountService.save(account);
 

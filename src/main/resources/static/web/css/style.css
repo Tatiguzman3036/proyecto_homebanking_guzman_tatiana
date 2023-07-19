@@ -1,11 +1,12 @@
-*{
+/* *{
     margin: 0 !important;
     padding: 0 !important;
     box-sizing: border-box !important;
-}
+    border: 2px solid red;
+} */
 body {
     min-height: 100vh !important;
-    background-image: url(../images/54347.jpg) !important;
+    background-image: url(https://cloudfront-us-east-1.images.arcpublishing.com/radiomitre/FOWEF2ED2ZG3VGCIJLCPKBMNAE.jpg) !important;
     background-position: center !important;
     background-repeat: no-repeat !important;
     background-size: cover !important;

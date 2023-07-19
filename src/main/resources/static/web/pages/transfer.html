@@ -12,7 +12,7 @@
 <body>
     <div id="app">
         <header>
-            <nav class="navbar navbar-expand-lg m-2 rounded-2">
+            <nav class="navbar navbar-expand-lg">
                 <div class="container-fluid">
                   <a class="navbar-brand" href="#">
                     <img class="imagennavbar" src="../images/la-guzmi.png" alt="" />
@@ -22,17 +22,17 @@
                   </button>
                   <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 gap-3 text-center">
+                      <!-- <li class="nav-item">
+                        <a class="nav-link text-white active" aria-current="page" href="../index.html">Homepage</a>
+                      </li> -->
                       <li class="nav-item">
-                        <a class="nav-link text-white active" aria-current="page" href="./accounts.html">Home</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link text-white" href="./accounts2.html">Account</a>
+                        <a class="nav-link text-white" href="./accounts.html">Account</a>
                       </li>
                       <li class="nav-item">
                         <a class="nav-link text-white" href="./card.html">Card</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link text-white" href="#">Transfer</a>
+                        <a class="nav-link text-white border border-end-0 border-top-0 border-white" href="#">Transfer</a>
                       </li>
                       <li class="nav-item">
                         <a class="nav-link disabled text-white">Customer Support</a>
@@ -46,14 +46,16 @@
               </nav>
         </header>
         <main>
+          <section>
+            <h3 class="text-center m-2">Please select the place where the transfer will be destined:</h3>
+          </section>
               <div class="section">
-                <div>
-                  <div class="row justify-content-center">
+                  <div class=" justify-content-center">
                     <div class="col-12 text-center">
                       <div class="section pb-5 pt-5 pt-sm-2 text-center">
-                        <h6 class="mb-0 pb-3 ms-5">
+                        <h6 class="mb-0 pb-3">
                             <span>Own account</span>
-                            <span>Third party account</span></h6>
+                            <span>Other account</span></h6>
                               <input class="checkbox" type="checkbox" id="reg-log" name="reg-log"/>
                               <label for="reg-log"></label>
                         <div class="card-3d-wrap mx-auto">
@@ -65,19 +67,19 @@
                                   <div class="">
                                     <h5 class="text-white">Choose the account to use:</h5>
                                     <select id="accountOrigin" class="form-select" v-model="transferDTO.accountOrigin" >
-                                        <option v-for="accounts of account" :value="accounts.number" >{{accounts.number}} , BALANCE:{{accounts.balance}}</option>
+                                        <option v-for="accounts of account" :value="accounts.number" >{{accounts.number}} , BALANCE: <strong>$</strong> {{accounts.balance}}</option>
                                     </select>
                                     <h5 class="text-white">Choose the account to transfer:</h5>
                                     <select id="accountDestiny" class="form-select" v-model="transferDTO.accountDestination" >
-                                        <option v-for="accounts of account" :value="accounts.number" >{{accounts.number}}, BALANCE:{{accounts.balance}} </option>
+                                        <option v-for="accounts of accountsExceptSelected" :value="accounts.number" >{{accounts.number}}, BALANCE:{{accounts.balance}} </option>
                                     </select>
                                     <label for="amount" class="text-white" >Amount:</label>
                                     <div class="input-group mb-3">
-                                        <span class="input-group-text">$</span>
+                                        <span class="input-group-text"><strong>$</strong></span>
                                         <input type="number" class="form-control" id="amount" v-model="transferDTO.amount" aria-label="Amount (to the nearest dollar)">
                                       </div>
                                     <div class="input-group">
-                                        <span class="input-group-text">Description:</span>
+                                        <span class="input-group-text"><strong>Description:</strong></span>
                                         <textarea class="form-control" v-model="transferDTO.description" aria-label="With textarea"></textarea>
                                       </div>
                                     <div class="d-flex justify-content-center m-1">
@@ -99,16 +101,16 @@
                                   </div>  
                                   <div class=" mt-2">
                                     <label for="accountDestination" class="text-white">Enter the account number to send:</label>
-                                    <input type="email" name="accountDestination" v-model="transferDTO.accountDestination" id="accountDestination" placeholder="ej: VIN-XXXXXX" autocomplete="off">
+                                    <input type="email" name="accountDestination" v-model="transferDTO.accountDestination" id="accountDestination" class="w-100" placeholder="ej: VIN-XXXXXX" autocomplete="off">
                                   </div>  
                                   <label for="amount" class="text-white" >Amount:</label>
                                     <div class="input-group mb-3">
-                                        <span class="input-group-text w-25">$</span>
+                                        <span class="input-group-text w-25"><strong>$</strong></span>
                                         <input type="number" id="amount" class="w-75" v-model="transferDTO.amount" aria-label="Amount (to the nearest dollar)">
                                       </div>
                                     <div class="input-group">
-                                        <span class="input-group-text">Description:</span>
-                                        <textarea v-model="transferDTO.description" aria-label="With textarea"></textarea>
+                                        <span class="input-group-text w-25 p-0"><strong>Description</strong></span>
+                                        <textarea v-model="transferDTO.description" class="w-75" aria-label="With textarea"></textarea>
                                       </div>
                                     <div class="d-flex justify-content-center m-1">
                                         <input type="submit" class="submit m-1 text-center" value="SUBMIT" @click.prevent="makeTransfer1()">
@@ -121,14 +123,48 @@
                           </div>
                         </div>
                       </div>
-                  </div>
               </div>
             
         </main>
-        <footer class="bg-black m-2 rounded-2 text-center">
-          <h5 class="text-white">&copy Developed By : Tatiana Guzmán</h5>
-      </footer>
-
+        <footer class=" pt-2 d-flex justify-content-around align-items-center flex-wrap">
+          <div class=" flex-wrap">
+            <ul class="ps-5">
+              <h5 class="text-white">Follow us on our accounts:</h5>
+              <li>
+                <a class="d-flex align-items-center m-1" target="_blank" href="https://es-la.facebook.com/">
+                  <img class=" icono shadow bg bg-white rounded-2 " src="../images/fb.png" alt="Logo de Facebook">
+                  <p class="text-white m-0 text-decoration-none">|La Guzmi Fb</p>
+                </a>
+              </li>
+              <li>
+                <a class="d-flex align-items-center m-1" target="_blank"  href="https://ar.linkedin.com/?original_referer=https%3A%2F%2Fwww.google.com%2F">
+                  <img class=" icono2 bg bg-white rounded-2 " src="../images/in.png" alt="Lode de wpp">
+                  <p class="text-white m-0 text-decoration-none">|LaGuzmiLinkedin</p>
+                </a>
+              </li>
+              <li>
+                <a class="d-flex align-items-center m-1" target="_blank" href="https://www.instagram.com/">
+                  <img class=" icono2 bg bg-white rounded-2 " src="../images/instagram.png" alt="Lode de ig">
+                  <p class="text-white m-0 text-decoration-none">|La Guzmi Ig</p>
+                </a>
+              </li>
+            </ul>
+          </div>
+          <section class=" d-flex flex-column flex-wrap ">
+                <div>
+                  <h5 class="text-white text-center">Contact Us:</h5>
+                </div>
+            <div class="d-flex flex-wrap gap-2">
+                <i class="bi bi-telephone-fill"><a href="tel:0810-220-8466" class="ms-2 text-decoration-none text-white">TEL: 11-4560-8975</a></i>
+                <i class="bi bi-envelope"><a href="mailto:homebankingLaGuzmi@laguzmi.com"
+                        class="ms-2 text-decoration-none text-white">E-MAIL: homebankingLaGuzmi@laguzmi.com</a></i>
+                <i class="bi bi-geo-alt-fill"><a href="" class="ms-2 text-decoration-none text-white">ADRESS: Paraguay 5533</a></i>
+            </div>
+          </section>
+          <div class="">
+            <h5 class="text-white text-center m-0">&copy Developed By : Tatiana Guzmán</h5>
+          </div>
+        </footer>
     </div>
     
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

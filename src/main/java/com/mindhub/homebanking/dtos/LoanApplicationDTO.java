@@ -5,6 +5,7 @@ public class LoanApplicationDTO {
     private Double amount;
     private Integer payments;
     private String accountDestination;
+    private Double percentage;
 
     public LoanApplicationDTO() {
     }
@@ -23,5 +24,9 @@ public class LoanApplicationDTO {
 
     public String getAccountDestination() {
         return accountDestination;
+    }
+
+    public Double getPercentage() {
+        return percentage;
     }
 }

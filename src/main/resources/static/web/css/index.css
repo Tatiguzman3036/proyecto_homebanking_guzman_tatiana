@@ -1,8 +1,9 @@
 /* *{
-    margin: 0 !important;
+    /* margin: 0 !important;
     padding: 0 !important;
-    box-sizing: border-box !important;
-} */
+    box-sizing: border-box !important; */
+    /* border: #f85959 2px solid; */
+
 body {
     min-height: 100vh !important;
     background-color: #0e00332e !important;
@@ -20,11 +21,20 @@ main {/* background-color: #55efc4 !important; */
     min-height: 74vh !important;
 }
 footer {
-    height: 5vh !important;
+    min-height: 5vh !important;
+    background-color: #0f3c69!important;
 }
 .navbar {
     background-color: #0f3c69!important;
   }
+  .icono{
+    width: 5vw !important;
+    height: 5vh !important;
+}
+.icono2{
+  width: 5vw !important;
+    height: 5vh !important;
+}
 .imagennavbar {
     height: 15vh !important;
     width: 10vw !important;
@@ -37,9 +47,6 @@ footer {
 }
 .navbar-collapse{
     flex-grow: 0 !important;
- }
- .nav-item{
-   padding-top: 0.5rem !important;
  }
 .buttonSignOut{
     width: 150px;
@@ -68,6 +75,33 @@ footer {
      0 8px 0 -4px #39a2db,
      0 12px 10px -3px #39a2db;
   }
+  .buttonCreated{
+    width: 150px;
+    height: 60px;
+    font-size: 1.1em;
+    cursor: pointer;
+    background-color: #4135e4;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    transition: all .4s;
+    margin-right: 0.5rem !important;
+    padding-top: 0.2rem !important;
+  }
+.buttonCreated:hover{
+    border-radius: 5px;
+    transform: translateY(-10px);
+    box-shadow: 0 7px 0 -2px #f85959,
+     0 15px 0 -4px #39a2db,
+     0 16px 10px -3px #39a2db;
+}
+.buttonCreatedt:active{
+    transition: all 0.2s;
+    transform: translateY(-5px);
+    box-shadow: 0 2px 0 -2px #f85959,
+     0 8px 0 -4px #39a2db,
+     0 12px 10px -3px #39a2db;
+  }
   .imagenes-carrousel1{
     height: 50vh !important;
   }
@@ -76,4 +110,8 @@ footer {
   }
   .imagenes-carrousel3{
     height: 50vh !important;
+  }
+  .imagen1{
+    height: 50vh !important;
+    width: 95% !important;
   }

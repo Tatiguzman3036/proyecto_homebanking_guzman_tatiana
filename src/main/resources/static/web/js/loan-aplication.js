@@ -35,6 +35,27 @@ const app = createApp ({
         }).catch(error => console.log(error))
         },
         createdLoans() {
+          if (this.loanDTO.idLoanType === null && this.loanDTO.accountDestination.length === 0 && this.loanDTO.amount === null && this.loanDTO.payments.length === 0) {
+            Swal.fire({
+              icon:'error',
+              title: 'The data entered is incorrect, please re-enter it!'});
+          }else if (this.loanDTO.idLoanType === null && this.loanDTO.accountDestination.length !== 0 && this.loanDTO.amount !== null && this.loanDTO.payments.length !== 0) {
+            Swal.fire({
+              icon:'error',
+              title: 'The type of loan entered is incorrect!'});
+          }else if (this.loanDTO.idLoanType !== null && this.loanDTO.accountDestination.length === 0 && this.loanDTO.amount !== null && this.loanDTO.payments.length !== 0) {
+            Swal.fire({
+              icon:'error',
+              title: 'The type of account destination entered is incorrect!!'});
+          }else if (this.loanDTO.idLoanType !== null && this.loanDTO.accountDestination.length !== 0 && this.loanDTO.amount === null && this.loanDTO.payments.length !== 0) {
+            Swal.fire({
+              icon:'error',
+              title: 'The type of amount is incorrect!!'});
+          }else if (this.loanDTO.idLoanType !== null && this.loanDTO.accountDestination.length !== 0 && this.loanDTO.amount !== null && this.loanDTO.payments.length == 0) {
+            Swal.fire({
+              icon:'error',
+              title: 'The type of payments is incorrect!!'});
+          } else{
             Swal.fire({
               title: 'Are you sure you want to proceed with the loan?',
               icon: 'question',
@@ -63,6 +84,7 @@ const app = createApp ({
                         console.log(res);
                         Swal.fire({
                           position: 'center',
+                          icon: 'success',
                           title: 'Loan OK!',
                           showConfirmButton: false,
                           timer: 1500
@@ -81,7 +103,7 @@ const app = createApp ({
               }
             }).catch(err => console.log(err))
           }
-          
+        }
     },
     watch: {
         "loanDTO.idLoanType"(newType){

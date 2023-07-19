@@ -2,9 +2,6 @@ package com.mindhub.homebanking.controllers;
 
 import com.mindhub.homebanking.dtos.TransferDTO;
 import com.mindhub.homebanking.models.*;
-import com.mindhub.homebanking.repositories.AccountRepository;
-import com.mindhub.homebanking.repositories.ClientRepository;
-import com.mindhub.homebanking.repositories.TransactionRepository;
 import com.mindhub.homebanking.services.AccountService;
 import com.mindhub.homebanking.services.ClientService;
 import com.mindhub.homebanking.services.TransactionService;
@@ -65,15 +62,17 @@ public class TransactionController {
         if (accountOrigin.getBalance() < transferDTO.getAmount() ){
             return new ResponseEntity<>("The origin account does not have sufficient funds.", HttpStatus.FORBIDDEN);
         }
-        Transaction transaction = new Transaction(TransactionType.CREDIT,amount,transferDTO.getAccountOrigin() + description, LocalDateTime.now());
-        Transaction transaction1 = new Transaction(TransactionType.DEBIT,Double.parseDouble("-" + amount),transferDTO.getAccountDestination() + description, LocalDateTime.now());
+
+        Transaction transaction = new Transaction(TransactionType.CREDIT,amount,transferDTO.getAccountOrigin() + description, LocalDateTime.now(),accountDestination.getBalance() + amount);
+        Transaction transaction1 = new Transaction(TransactionType.DEBIT,Double.parseDouble("-" + amount),transferDTO.getAccountDestination() + description, LocalDateTime.now(),accountOrigin.getBalance() - amount);
         accountOrigin.setBalance(accountOrigin.getBalance() - amount);
         accountDestination.setBalance(accountDestination.getBalance() + amount);
         accountDestination.addTransaction(transaction);
         accountOrigin.addTransaction(transaction1);
         transactionService.save(transaction1);
         transactionService.save(transaction);
-
+        accountService.save(accountDestination);
+        accountService.save(accountOrigin);
         return new ResponseEntity<>("Transaction completed.",HttpStatus.CREATED);
     }
 }
