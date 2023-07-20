@@ -58,28 +58,57 @@ const app = createApp({
                     timer:2000
                 })
             }else if (this.email.length  !== 0  && this.password.length  !== 0) {
-              axios.post('/api/login', `email=${this.email}&password=${this.password}`, {
-                headers: { 'content-type': 'application/x-www-form-urlencoded' }
-              })
-              .then((res) => {
-                Swal.fire({
-                  position: 'center',
-                  icon: 'success',
-                  title: 'Welcome!',
-                  showConfirmButton: false,
-                  timer: 2000
-                });
-                setTimeout(()=>{
-                    window.location.href = "/web/pages/accounts.html"
-                  },2500)
-              })
-              .catch(error => {
-            Swal.fire({
-                icon:'error',
-                title: 'The data entered is incorrect, please re-enter it!'});
-            console.log(error)});
+                if (this.email.includes("admin")) {
+                    axios.post("/api/login", `email=${this.email}&password=${this.password}`,
+                        { headers: { 'content-type': 'application/x-www-form-urlencoded' } })
+                        .then(res => {
+                            if (res.status == 200) {
+                                Swal.fire({
+                                    position: 'center',
+                                    icon: 'success',
+                                    title: 'Welcome!',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                })
+                                setTimeout(() => {
+                                    window.location.href = "/web/manager.html";
+                                }, 1800)
+                            }
+                        }).catch(err => {
+                            Swal.fire({
+                                position: 'center',
+                                icon: 'error',
+                                title: 'Incorrect, try again!!',
+                                showConfirmButton: false,
+                                timer: 1500
+                            })
+                        })
+                } else {
+                    axios.post('/api/login', `email=${this.email}&password=${this.password}`, { headers: { 'content-type': 'application/x-www-form-urlencoded' }})
+                        .then( response => {{
+                                Swal.fire({
+                                    position: 'center',
+                                    icon: 'success',
+                                    title: 'Welcome!',
+                                    showConfirmButton: false,
+                                    timer: 1000
+                                })
+                                setTimeout(() => {
+                                    window.location.href = "/web/pages/accounts.html";
+                                }, 1800)
+                            }
+                        }).catch(err => {
+                            Swal.fire({
+                                position: 'center',
+                                icon: 'error',
+                                title: 'Incorrect, try again!!',
+                                showConfirmButton: false,
+                                timer: 1500
+                            })
+                        })
+                }
             }
-          },
+        },
           register(){
             if (this.firstName.length === 0 && this.lastName.length !== 0 && this.emailRegister.length !== 0 && this.passwordRegister.length !== 0) {
                 Swal.fire({
@@ -125,17 +154,58 @@ const app = createApp({
             else {
                 axios.post('/api/clients',`firstName=${this.firstName}&lastName=${this.lastName}&email=${this.emailRegister}&password=${this.passwordRegister}`)
                 .then(res =>{
-                    axios.post('/api/login',`email=${this.emailRegister}&password=${this.passwordRegister}`)
-                    .then(res=>{
-                        window.location.href = "/web/pages/accounts.html"
-                        console.log('Inicio de sesión exitoso:', res.data);
-                    }).catch(error =>console.log(error))
-                }).catch(error => {
-                    this.error1 = error.response.data
-                Swal.fire({
-                    icon:'error',
-                    title: `${this.error1}`});
-                /* console.log(error) */});
+                    if (this.emailRegister && this.passwordRegister) {
+                        if (this.emailRegister.includes("admin")) {
+
+                            axios.post('/api/login',`email=${this.emailRegister}&password=${this.passwordRegister}`)
+
+                                .then(res => {
+                                    if (res.status == 200) {
+                                        Swal.fire({
+                                            position: 'center',
+                                            icon: 'success',
+                                            title: 'Welcome!',
+                                            showConfirmButton: false,
+                                            timer: 1500
+                                        })
+                                        setTimeout(() => {
+                                            window.location.href = "/web/manager.html";
+                                        }, 1800)
+                                    }
+                                }).catch(err => {
+                                    Swal.fire({
+                                        position: 'center',
+                                        icon: 'error',
+                                        title: 'Incorrect, try again!!',
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                    })
+                                })
+                        } else {
+                            axios.post('/api/login',`email=${this.emailRegister}&password=${this.passwordRegister}`)
+                                .then( response => {{
+                                        Swal.fire({
+                                            position: 'center',
+                                            icon: 'success',
+                                            title: 'Welcome!',
+                                            showConfirmButton: false,
+                                            timer: 1000
+                                        })
+                                        setTimeout(() => {
+                                            window.location.href = "/web/pages/accounts.html";
+                                        }, 1800)
+                                    }
+                                }).catch(err => {
+                                    Swal.fire({
+                                        position: 'center',
+                                        icon: 'error',
+                                        title: 'Incorrect, try again!!',
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                    })
+                                })
+                        }
+                    }   /* console.log(error) */});
                 }
             
           }

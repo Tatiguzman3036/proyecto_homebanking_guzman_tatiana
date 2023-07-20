@@ -8,7 +8,10 @@ const app = createApp({
             loan:[],
             card:[],
             createdAccounts:[],
-            id:""
+            id:"",
+            accountDTO:{
+                accountType: ""
+            }
         }
     },
     created(){
@@ -41,7 +44,7 @@ const app = createApp({
             })
             .catch(error => console.log(error))
         },
-        created(){
+        /* created(){
             axios.post("/api/clients/current/accounts")
             .then(res => {
                     this.loadData()
@@ -59,7 +62,45 @@ const app = createApp({
                       }
             }).catch(error =>
                 console.log(error))
-        },
+        }, */
+        createAccount() {
+            Swal.fire({
+              title: 'Select account type',
+              input: 'select',
+              inputOptions: {
+                'SAVINGS': 'SAVINGS',
+                'CURRENT': 'CURRENT'
+              },
+              inputPlaceholder: 'Select account type',
+              showCancelButton: true,
+              confirmButtonText: 'Create',
+              cancelButtonText: 'Cancel',
+              icon: 'question'
+            }).then((result) => {
+              if (result.isConfirmed) {
+                const accountType = result.value;
+                axios.post(`/api/clients/current/accounts?accountType=${accountType}`)
+                  .then(res => {
+                    console.log(res);
+                    Swal.fire({
+                      position: 'center',
+                      title: 'Account created successfully!',
+                      showConfirmButton: false,
+                      timer: 1500
+                    })
+                    setTimeout(()=>{
+                        window.location.href = "accounts.html"
+                      },1800)
+                  })
+                  .catch(err => {
+                    console.log(err);
+                    Swal.fire('Error creating account', '', 'error');
+                  });
+              }
+            });
+          },
+          
+          
         colorType(card){
             if (card.color === "GOLD") {
                 return 'gold'
@@ -92,3 +133,4 @@ const app = createApp({
     }
 });
 app.mount('#app')
+

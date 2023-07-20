@@ -53,7 +53,7 @@
     </section>
     <div class=""  v-if="account.length < 3">
       <div class="m-2 d-flex justify-content-end">
-        <button class="buttonCreatedAccount" @click="created()">Created Account</button>
+        <button class="buttonCreatedAccount" @click="createAccount()">Created Account</button>
       </div>
       <div>
         <h3 class="d-flex justify-content-center align-items-center ya m-2 text-white">Your Accounts:</h3>
@@ -63,7 +63,7 @@
       <h3 class="d-flex justify-content-center align-items-center ya m-2 text-white">Your Accounts:</h3>
   </div>
     <div class="d-flex flex-wrap justify-content-around">
-      <div class="flip-card2 d-flex" v-for="accounts of account">
+      <div class="flip-card2 " v-for="accounts of account">
         <div class="flip-card-inner2">
           <div class="flip-card-front2">
             <img src="../images/la-guzmi.card.png" alt="" />
@@ -75,6 +75,7 @@
                   <h5 class="card-title">
                     Account number: {{accounts.number}}
                   </h5>
+                  <h5>Type Account: {{accounts.accountType}}</h5>
                   <h5 class="card-subtitle">Creation Date: </h5>
                   <p>{{accounts.creationDate}}</p>
                   <h5 class="card-subtitle">Balance: ${{accounts.balance.toFixed(2)}}</h5>

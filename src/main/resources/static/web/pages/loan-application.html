@@ -56,7 +56,7 @@
                     <div >
                         <h5 class="text-white text-center">Select the type of loan</h5>
                         <select id="idLoanType" name="type" v-model="loanDTO.idLoanType" class="form-select">
-                            <option v-for="loan of loans"  :value="loan.id">{{loan.loanName}} </option>
+                            <option v-for="loan of loans"  :value="loan.id">{{loan.name}} </option>
                         </select>
                     </div>
                     <div >

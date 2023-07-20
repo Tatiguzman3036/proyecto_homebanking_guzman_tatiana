@@ -26,6 +26,7 @@ class WebAuthorization {
                 .antMatchers(HttpMethod.POST,"/api/clients/current/accounts","/api/clients/current/cards",
                         "/api/transactions", "/api/loans").hasAuthority("CLIENT")
                 .antMatchers("/web/manager.html", "/rest/**","/h2-console/**").hasAuthority("ADMIN")
+                .antMatchers(HttpMethod.POST,"/api/loans/createdLoans").hasAuthority("ADMIN")
                 .antMatchers("/api/loans","/api/clients/current/accounts","/api/clients/accounts").hasAuthority("CLIENT")
                 .antMatchers("/web/pages/account.html","/web/pages/accounts.html","/web/pages/card.html","/web/pages/accounts2.html"
                         ,"/web/pages/transfer.html","/web/pages/loan-application.html","/web/pages/createdCard.html").hasAuthority("CLIENT");

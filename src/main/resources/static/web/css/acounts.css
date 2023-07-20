@@ -119,8 +119,8 @@ caption {
 /* ----------------------------------------------------------------------------- */
   .flip-card2 {
     background-color: transparent;
-    width: 190px;
-    height: 254px;
+    width: 200px;
+    height: 290px;
     perspective: 1000px;
     font-family: sans-serif;
   }

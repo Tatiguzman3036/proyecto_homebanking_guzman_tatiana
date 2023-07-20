@@ -31,10 +31,10 @@ public class  HomebankingApplication {
 			Client melba = new Client("Melba", "Morel", "melba@mindhub.com" , passwordEncoder.encode("Melba123"));
 			Client tatiana = new Client("Tatiana", "Guzman", "tatiguzmn@hotmail.com", passwordEncoder.encode("Tatiana123"));
 
-			Account VIN001 = new Account("VIN001", LocalDate.now(), 5000.00, true);
-			Account VIN002 = new Account("VIN002", LocalDate.now().plusDays(1),7500.00,true);
-			Account VIN003 = new Account("VIN003", LocalDate.now().plusDays(3), 15000.00,true);
-			Account VIN004 = new Account("VIN004", LocalDate.now(), 80000.00,true);
+			Account VIN001 = new Account("VIN001", LocalDate.now(), 5000.00, true,AccountType.CURRENT);
+			Account VIN002 = new Account("VIN002", LocalDate.now().plusDays(1),7500.00,true, AccountType.SAVINGS);
+			Account VIN003 = new Account("VIN003", LocalDate.now().plusDays(3), 15000.00,true,AccountType.CURRENT);
+			Account VIN004 = new Account("VIN004", LocalDate.now(), 80000.00,true,AccountType.SAVINGS);
 
 			Transaction transaction01 = new Transaction(TransactionType.CREDIT, 1000.00,"Mercado Libre", LocalDateTime.now(),200.0);
 			Transaction transaction02 = new Transaction(TransactionType.DEBIT, -1800.00,"Mc Donalds", LocalDateTime.now(),500.0);
@@ -72,7 +72,8 @@ public class  HomebankingApplication {
 			VIN001.addTransaction(transaction01);
 			VIN001.addTransaction(transaction02);
 			VIN002.addTransaction(transaction03);
-			VIN002.addTransaction(transaction04);
+//			VIN002.addTransaction(transaction04);
+			VIN003.addTransaction(transaction04);
 			transactionService.save(transaction01);
 			transactionService.save(transaction02);
 			transactionService.save(transaction03);

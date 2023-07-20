@@ -7,28 +7,38 @@ import java.util.List;
 public class LoanDTO {
     private Long id;
     private String name;
-    private Double amount;
+    private Double maxAmount;
+    private Double percentage;
     private List<Integer> payments;
+
+    public LoanDTO() {
+    }
+
     public LoanDTO(Loan loan){
         id = loan.getId();
         name = loan.getName();
-        amount = loan.getMaxAmount();
+        maxAmount = loan.getMaxAmount();
         payments = loan.getPayments();
+        percentage = loan.getPercentage();
     }
 
     public Long getId() {
         return id;
     }
 
-    public String getLoanName() {
+    public String getName() {
         return name;
     }
 
-    public double getAmount() {
-        return amount;
+    public Double getMaxAmount() {
+        return maxAmount;
     }
 
     public List<Integer> getPayments() {
         return payments;
+    }
+
+    public Double getPercentage() {
+        return percentage;
     }
 }

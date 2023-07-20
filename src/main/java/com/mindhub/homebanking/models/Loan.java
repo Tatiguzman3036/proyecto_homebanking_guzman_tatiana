@@ -18,7 +18,7 @@ public class Loan {
     private long id;
     private String name;
     private Double maxAmount;
-    private Double porcentaje;
+    private Double percentage;
     @ElementCollection
     private List<Integer> payments;
     @OneToMany(mappedBy="loan", fetch=FetchType.EAGER)
@@ -27,11 +27,11 @@ public class Loan {
     public Loan() {
     }
 
-    public Loan(String name, Double maxAmount, List<Integer> payments,Double porcentaje) {
+    public Loan(String name, Double maxAmount, List<Integer> payments,Double percentage) {
         this.name = name;
         this.maxAmount = maxAmount;
         this.payments = payments;
-        this.porcentaje = porcentaje;
+        this.percentage = percentage;
     }
     public void addClientLoan (ClientLoan clientLoan){
         clientLoan.setLoan(this);
@@ -71,11 +71,11 @@ public class Loan {
         this.payments = payments;
     }
 
-    public Double getPorcentaje() {
-        return porcentaje;
+    public Double getPercentage() {
+        return percentage;
     }
 
-    public void setPorcentaje(Double porcentaje) {
-        this.porcentaje = porcentaje;
+    public void setPercentage(Double percentage) {
+        this.percentage = percentage;
     }
 }
