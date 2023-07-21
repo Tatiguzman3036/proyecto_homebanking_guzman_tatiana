@@ -16,7 +16,7 @@ public class Card {
     private String cardholder;
     private CardType type;
     private ColorType color;
-    private int cvv;
+    private Integer cvv;
     private LocalDate thruDate;
     private LocalDate fromDate;
     private String number;
@@ -27,7 +27,7 @@ public class Card {
 
     public Card() { }
 
-    public Card(String cardholder, CardType type, ColorType color, int cvv, LocalDate thruDate, LocalDate fromDate,String number) {
+    public Card(String cardholder, CardType type, ColorType color, Integer cvv, LocalDate thruDate, LocalDate fromDate,String number,Boolean status) {
         this.cardholder = cardholder;
         this.type = type;
         this.color = color;
@@ -35,6 +35,7 @@ public class Card {
         this.fromDate = fromDate;
         this.thruDate = thruDate;
         this.number = number;
+        this.status = status;
     }
 
     public long getId() {
@@ -67,11 +68,11 @@ public class Card {
         this.color = color;
     }
 
-    public int getCvv() {
+    public Integer getCvv() {
         return cvv;
     }
 
-    public void setCvv(int cvv) {
+    public void setCvv(Integer cvv) {
         this.cvv = cvv;
     }
 

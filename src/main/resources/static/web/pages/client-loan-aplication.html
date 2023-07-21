@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bank "LA GUZMI"|Account</title>
-    <link rel="stylesheet" href="../css/acount.css">
+    <link rel="stylesheet" href="../css/clientLoan-aplication.css">
     <link rel="shortcut icon" href="../images/la-guzmi.png" type="image/x-icon" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous" />
 </head>
 <body>
   <div id="app">
     <header>
-        <nav class="navbar navbar-expand-lg ">
+        <nav class="navbar navbar-expand-lg">
           <div class="container-fluid">
             <a class="navbar-brand" href="#">
               <img class="imagennavbar" src="../images/la-guzmi.png" alt="" />
@@ -44,58 +44,40 @@
           </div>
         </nav>
       </header>
-    <main class="pt-5">
-        <div v-if="transactions !=0" class="d-flex justify-content-around gap-3 flex-wrap">
-          <table class="w-50">
-            <caption class="text-center text-white">Your account details:</caption>
-            <caption class="text-center text-white fs-3">Account Number:{{allAccount.number}} </caption>
-            <thead>
-              <tr>
-                <th>Type of Description</th>
-                <th>Description</th>
-                <th>Amount</th>
-                <th>Date</th>
-                <th class="time">Time</th>
-                <th class="balance">Current Balance</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr v-for="account of transactions">
-                <td class="text-danger" v-if="account.type == `DEBIT`" ><strong>{{account.type}}</strong> </td>
-                <td class="text-success" v-else><strong>{{account.type}}</strong> </td>
-                <td >{{account.description}} </td>
-                <td class="text-danger" v-if="account.type == `DEBIT`" ><strong>${{(account.amount).toFixed(2)}}</strong> </td>
-                <td class="text-success" v-else><strong>${{account.amount}}</strong> </td>
-                <td>{{account.date.slice(0,10)}} </td>
-                <td class="time">{{account.date.slice(11,19)}} </td>
-                <td class="balance">${{(account.currentBalance).toFixed(2)}}</td>
-              </tr>
-            </tbody>
-          </table>
-          <div class="card" style="width: 18rem; height: 13rem;">
-            <div class="card-body">
-              <h5 class="card-title text-white">➼Detailed data of your account:</h5>
-                <h3 class="text-center text-white">{{allAccount.number}}</h3>
-              <h5 class="card-subtitle text-white">➼Creation Date:{{allAccount.creationDate}}</h5>
-              <h5 class="card-subtitle text-white">➼Balance: ${{allAccount.balance.toFixed(2)}}</h5>
-            </div>
+      <main>
+        <section>
+          <h2 class=" text-center">Please select the type of loan you want to pay:</h2>
+        </section>
+         <div  class="d-flex justify-content-center align-items-center mt-1">
+          <div class="card d-inline-block w-50 shadow">
+              <div class="card-body">
+                  <div >
+                      <h5 class="text-white text-center">Select the loan you want to pay:</h5>
+                      <select id="idLoanType" name="type" v-model="loanToPay" class="form-select">
+                          <option v-for="loans of loan"  :value="loans.id">{{loans.name}} </option>
+                      </select>
+                  </div>
+                  <div class="bg bg-white mt-3">
+                    <p v-if="selectedLoan">The amount you need to pay is: <strong> ${{ (selectedLoan.amount / selectedLoan.payments).toFixed(2) }}</strong></p>
+                  </div>
+                  <div >
+                      <h5 class="text-white text-center">Available installments</h5>
+                      <select id="payments" name="type" v-model="account" class="form-select" >
+                          <option v-for="accounts of accounts" >{{accounts.number}} </option>
+                      </select>
+                  </div>
+              </div >
+              <div class="d-flex justify-content-center m-1">
+                <button type="button" class="submit m-1 text-center" @click.prevent="payToLoan()">Pay</button>
+              </div>
           </div>
-        </div>
-        <div v-else class="d-flex p-5">
-          <img class="iamgenElse w-50 h-50" src="../images/maxresdefault-removebg-preview.png" alt="">
-         <div class="text-velse">
-            <h4 class="text-white text-center">Oops, it seems that something happened...</h4>
-            <h5 class="text-white text-center">It appears that you don't have any transactions in that account.</h5>
-            <h5 class="text-white text-center">For any inquiries, you can contact us by accessing the "Contact" section, 
-              and we will assist you with your situation.</h5>
-            <p class="text-white text-center m-2">Thank you very much, Central Bank "La Guzmi".</p>
          </div>
-        </div>
-        <div class="d-flex justify-content-center align-items-center">
-          <a class="text-center buttom m-5 text-decoration-none" href="./accounts.html">Go Back</a>
-        </div>
+          <div class="d-flex justify-content-around m-2">
+              <a class="text-decoration-none bg bg-white rounded-5 text-black" href="./accounts.html"> GO BACK<img class="imagenGoBack" src="../images/back.png" alt="back"> </a>
+          </div>
+        
     </main>
-    <footer class=" pt-2 d-flex justify-content-around align-items-center flex-wrap">
+    <footer class="mt-2 pt-2 d-flex justify-content-around align-items-center flex-wrap">
       <section class=" d-flex flex-column flex-wrap ">
             <div>
               <h5 class="text-white text-center">Contact Us:</h5>
@@ -112,9 +94,10 @@
       </div>
     </footer>
   </div>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
       <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
       <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-      <script src="../js/account.js"></script>
+      <script src="../js/clientLoan-application.js"></script>
       <script
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"

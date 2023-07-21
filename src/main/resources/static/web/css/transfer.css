@@ -194,3 +194,9 @@ h6 span{
   background-color: #f8f4f4 !important;
   border-radius: 20px !important;
 }
+@media screen and (max-width: 425px) {
+  .card-3d-wrap {
+    width: 90vw !important;
+  }
+}
+

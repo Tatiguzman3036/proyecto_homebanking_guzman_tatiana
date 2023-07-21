@@ -48,10 +48,10 @@
     </nav>
   </header>
   <main>
-    <section class="">
+    <section>
       <h3 class="d-flex flex-column align-items-center m-2 text-white ya">Welcome {{client.firstName}} {{client.lastName}}!</h3>
     </section>
-    <div class=""  v-if="account.length < 3">
+    <div   v-if="account.length < 3">
       <div class="m-2 d-flex justify-content-end">
         <button class="buttonCreatedAccount" @click="createAccount()">Created Account</button>
       </div>
@@ -59,11 +59,11 @@
         <h3 class="d-flex justify-content-center align-items-center ya m-2 text-white">Your Accounts:</h3>
       </div>
     </div>
-    <div class="" v-else>
+    <div  v-else>
       <h3 class="d-flex justify-content-center align-items-center ya m-2 text-white">Your Accounts:</h3>
   </div>
-    <div class="d-flex flex-wrap justify-content-around">
-      <div class="flip-card2 " v-for="accounts of account">
+    <div class="d-flex flex-wrap justify-content-around m-2">
+      <div class="flip-card2 mb-5 " v-for="accounts of account">
         <div class="flip-card-inner2">
           <div class="flip-card-front2">
             <img src="../images/la-guzmi.card.png" alt="" />
@@ -85,13 +85,16 @@
             </div>
           </div>
         </div>
-        <div>
-          <button class="bd bg-success" @click="deleteAccount(accounts.id)">Delet account</button>
+        <div class="m-1">
+          <button class="bd bg-success rounded-2 m-1" @click="deleteAccount(accounts.id)">Delet account</button>
         </div>
       </div>
     </div>
-    <div class="m-2 d-flex justify-content-end" >
+    <div class=" d-flex justify-content-end" >
       <a href="./loan-application.html" type="submit" class="text-decoration-none text-center createdCardsbutton">Apply</a>
+     </div>
+     <div class="mt-2 mb-0 d-flex justify-content-end" >
+      <a href="./client-loan-aplication.html" type="submit" class="text-decoration-none text-center bg bg-danger createdCardsbutton">Make a payment</a>
      </div>
     <div v-if="loan !=0" class="pt-3 d-flex justify-content-center">
       <table >
@@ -99,15 +102,19 @@
         <thead>
           <tr>
             <th>Loan name</th>
-            <th>Payments</th>
-            <th>Amount</th>
+            <th>The number of payments</th>
+            <th>Total amount</th>
+            <th class="amount">Amount per payment</th>
+            <th>Remaining amount</th>
           </tr>
         </thead>
-        <tbody>
-          <tr v-for="loans of loan">
+        <tbody v-for="loans of loan">
+          <tr  v-if="loans.restAmount > 0">
             <td>{{loans.name}} </td>
-            <td>{{loans.payments}} </td>
+            <td>{{loans.loanPayments}} out of {{loans.payments}}  </td>
             <td>${{loans.amount}} </td>
+            <td class="amount">${{(loans.amount / loans.payments).toFixed(2)}} </td>
+            <td>${{(loans.restAmount).toFixed(2) }} </td>
           </tr>
         </tbody>
       </table>

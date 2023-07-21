@@ -51,10 +51,10 @@ public class  HomebankingApplication {
 			loanService.save(personal);
 			loanService.save(automotive);
 			//AGREGO CLIENTES CON CLIENTLOAN::///
-			ClientLoan mortgageMelba = new ClientLoan(400000.0,60);
-			ClientLoan personalMelba = new ClientLoan(50000.0,12);
-			ClientLoan personalTatiana = new ClientLoan(100000.0,24);
-			ClientLoan automotiveTatiana = new ClientLoan(200000.0,36);
+			ClientLoan mortgageMelba = new ClientLoan(400000.0,60,4,60.0);
+			ClientLoan personalMelba = new ClientLoan(50000.0,12,12,5000.0);
+			ClientLoan personalTatiana = new ClientLoan(100000.0,24,5,20000.0);
+			ClientLoan automotiveTatiana = new ClientLoan(200000.0,36,6,5000.0);
 
 			clientService.save(melba);
 			clientService.save(tatiana);
@@ -96,9 +96,9 @@ public class  HomebankingApplication {
 			clientLoanService.save(personalMelba);
 			clientLoanService.save(personalTatiana);
 			clientLoanService.save(automotiveTatiana);
-			Card gold = new Card(melba.getFirstName()+ " "+ melba.getLastName(), CardType.DEBIT,ColorType.GOLD, 750,LocalDate.now().minusDays(5),LocalDate.now().minusDays(10),"5541-7685-9210-0016");
-			Card titanium = new Card(melba.getFirstName()+ " "+ melba.getLastName(),CardType.CREDIT,ColorType.TITANIUM,698,LocalDate.now().plusYears(5),LocalDate.now(),"1918-4645-7070-0302");
-			Card silver = new Card(melba.getFirstName()+" "+ melba.getLastName(), CardType.CREDIT,ColorType.SILVER,711,LocalDate.now().plusYears(5),LocalDate.now(),"5578-2588-4091-3036");
+			Card gold = new Card(melba.getFirstName()+ " "+ melba.getLastName(), CardType.DEBIT,ColorType.GOLD, 750,LocalDate.now().minusDays(5),LocalDate.now().minusDays(10),"5541-7685-9210-0016",true);
+			Card titanium = new Card(melba.getFirstName()+ " "+ melba.getLastName(),CardType.CREDIT,ColorType.TITANIUM,698,LocalDate.now().plusYears(5),LocalDate.now(),"1918-4645-7070-0302",true);
+			Card silver = new Card(melba.getFirstName()+" "+ melba.getLastName(), CardType.CREDIT,ColorType.SILVER,711,LocalDate.now().plusYears(5),LocalDate.now(),"5578-2588-4091-3036",true);
 
 			melba.addCards(gold);
 			melba.addCards(titanium);

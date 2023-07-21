@@ -205,7 +205,7 @@ const app = createApp({
                                     })
                                 })
                         }
-                    }   /* console.log(error) */});
+                    } });
                 }
             
           }

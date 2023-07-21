@@ -28,6 +28,7 @@ footer {
 .expired-card{
   filter: grayscale(1) !important;
   background-color: #303030 !important;
+  border-radius: 10px !important;
 }
 /* .expired-card:hover{
   filter: blur(0);
@@ -116,10 +117,9 @@ footer {
   
   .heading_8264 {
     position: absolute;
-    letter-spacing: .2em;
-    font-size: 0.5em;
-    top: 2em;
-    left: 18.6em;
+    font-size: 0.7rem !important;
+    top: 1rem !important;
+    left: 9rem !important;
   }
   
   .logo {
@@ -142,8 +142,9 @@ footer {
   
   .number {
     position: absolute;
+    letter-spacing: 0.08rem !important;
     font-weight: bold;
-    font-size: .6em;
+    font-size: .7em;
     top: 8.3em;
     left: 1.6em;
   }
@@ -159,8 +160,8 @@ footer {
   .date_8264 {
     position: absolute;
     font-weight: bold;
-    font-size: 0.5em;
-    top: 13.6em;
+    font-size: 0.54rem !important;
+    top: 7rem !important;
     left: 3.2em;
   }
   

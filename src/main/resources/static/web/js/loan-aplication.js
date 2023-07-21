@@ -27,10 +27,9 @@ const app = createApp ({
             }).catch(err => console.log(err))
         },
         loadData(){
-            axios.get(`/api/clients/current`)
+            axios.get(`/api/clients/accounts`)
         .then(res =>{
-            this.account = res.data.accounts
-
+            this.account = res.data
             console.log(this.account);
         }).catch(error => console.log(error))
         },
@@ -103,7 +102,14 @@ const app = createApp ({
               }
             }).catch(err => console.log(err))
           }
-        }
+        },
+        signOut(){
+          axios.post('/api/logout')
+          .then(response => {
+              console.log('signed out!!!')
+              window.location.href = "/web/pages/login.html"
+          }).catch(error => console.log(error))
+      }
     },
     watch: {
         "loanDTO.idLoanType"(newType){

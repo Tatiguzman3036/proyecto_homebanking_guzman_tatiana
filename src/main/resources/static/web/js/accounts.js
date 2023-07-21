@@ -24,9 +24,6 @@ const app = createApp({
             .then(res => {
                 this.client = res.data
                 console.log(this.client);
-                /* this.account = res.data.accounts;
-                this.account.sort((itemA, itemB)=> itemA.id - itemB.id).filter(account => account.hidden !== true)
-                console.log(this.account); */
                 this.loan= res.data.loans
                 this.loan.sort((itemA,itemB) => itemA.id - itemB.id)
                 console.log(this.loan);
@@ -36,33 +33,12 @@ const app = createApp({
         loadData1(){
             axios.get("/api/clients/accounts")
             .then(res => {
-                /* this.client = res.data
-                console.log(this.client); */
                 this.account = res.data;
                 this.account.sort((itemA, itemB)=> itemA.id - itemB.id).filter(account => account.hidden !== true)
                 console.log(res);
             })
             .catch(error => console.log(error))
         },
-        /* created(){
-            axios.post("/api/clients/current/accounts")
-            .then(res => {
-                    this.loadData()
-                    if(res.status == 201){
-                        console.log(res);
-                        Swal.fire({
-                          position: 'center',
-                          title: 'Account Created',
-                          showConfirmButton: false,
-                          timer: 1500
-                      })
-                        setTimeout(()=>{
-                          window.location.href = "accounts.html"
-                        },1800)
-                      }
-            }).catch(error =>
-                console.log(error))
-        }, */
         createAccount() {
             Swal.fire({
               title: 'Select account type',

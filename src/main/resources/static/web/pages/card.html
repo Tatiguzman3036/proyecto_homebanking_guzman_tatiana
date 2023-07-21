@@ -60,7 +60,7 @@
         <article class="d-flex justify-content-center flex-wrap">
             <div class=" flip-card m-3"v-for="card of creditCard" >
               <div class="flip-card-inner" v-bind:class="colorType(card)">
-                <div class="flip-card-front">
+                <div class="flip-card-front shadow">
                       <p class="heading_8264 text-white">BANK "LA GUZMI"</p>
                       <svg
                         viewBox="0 0 48 48"
@@ -173,7 +173,7 @@
                         ></image>
                       </svg>
                       <p class="number text-white">{{card.number}} </p>
-                      <p class="date_8264 text-white">{{card.thruDate.slice(2,7)}} </p>
+                      <p class="date_8264 text-white">{{card.thruDate}} </p>
                       <p class="name text-white">{{card.cardholder.toUpperCase()}} </p>
                     </div>
                     <div class="flip-card-back">
@@ -309,8 +309,8 @@
                           id="image0"
                         ></image>
                       </svg>
-                      <p class="number text-white">{{card.number}} </p>
-                      <p class="date_8264 text-white">{{card.thruDate.slice(2,7)}} </p>
+                      <p class="number text-white shadow">{{card.number}} </p>
+                      <p class="date_8264 text-white shadow">{{card.thruDate}} </p>
                       <p class="name text-white">{{card.cardholder.toUpperCase()}} </p>
                     </div>
                     <div class="flip-card-back">

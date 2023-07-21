@@ -11,6 +11,28 @@ const app = createApp({
     },
     methods:{
         createdCards(){
+            if(this.type.length === 0 && this.color.length === 0){
+                Swal.fire({
+                    position: 'center',
+                    icon: 'warning',
+                    title: "Please enter the data!",
+                    showConfirmButton: false,
+                    timer:2000
+                })}else if(this.type.length !== 0 && this.color.length === 0){
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'warning',
+                        title: "Please enter type of card!",
+                        showConfirmButton: false,
+                        timer:2000
+                })}else if(this.type.length === 0 && this.color.length !== 0){
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'warning',
+                        title: "Please enter type of color!",
+                        showConfirmButton: false,
+                        timer:2000
+                    })}else {
             axios.post('/api/clients/current/cards',`type=${this.type}&color=${this.color}`)
             .then(res =>{
                 if(res.status == 201){
@@ -32,6 +54,7 @@ const app = createApp({
                 icon:'error',
                 title: `${this.error1}`});
             console.log(error)});
+        }
         },
         signOut(){
             axios.post('/api/logout')

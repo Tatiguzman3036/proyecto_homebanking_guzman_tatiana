@@ -3,11 +3,15 @@ package com.mindhub.homebanking.configurations;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.config.annotation.authentication.configuration.GlobalAuthenticationConfigurerAdapter;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.WebAttributes;
 import org.springframework.security.web.authentication.logout.HttpStatusReturningLogoutSuccessHandler;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,7 +19,7 @@ import javax.servlet.http.HttpSession;
 
 @EnableWebSecurity
 @Configuration
-class WebAuthorization {
+class WebAuthorization extends GlobalAuthenticationConfigurerAdapter implements WebMvcConfigurer {
 
     @Bean
     protected SecurityFilterChain filterChain (HttpSecurity http) throws Exception {
@@ -41,8 +45,7 @@ class WebAuthorization {
 
                 .loginPage("/api/login");
 
-
-
+//        http.cors();
         http.logout().logoutUrl("/api/logout").deleteCookies("JSESSIONID");
 
         // Desactivar la verificación de tokens CSRF
@@ -82,6 +85,13 @@ class WebAuthorization {
 
         }
 
+    }
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/api/**")
+                .allowedOrigins("http://127.0.0.1:5500") // Reemplaza la URL con la del front-end
+                .allowedMethods("GET", "POST", "PUT", "DELETE")
+                .allowedHeaders("*");
     }
 
 }

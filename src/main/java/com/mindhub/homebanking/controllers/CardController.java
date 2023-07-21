@@ -46,18 +46,11 @@ public class CardController {
         do {
             cardNumber = CardUtils.getStringBuilder(random).toString();
         } while ( cardService.existsByNumber(cardNumber));
-                Card card = new Card(client.getFirstName() + " " + client.getLastName(), type, color, cvv, LocalDate.now().plusYears(5), LocalDate.now(), cardNumber);
+                Card card = new Card(client.getFirstName() + " " + client.getLastName(), type, color, cvv, LocalDate.now().plusYears(5), LocalDate.now(), cardNumber,true);
                 client.addCards(card);
                 cardService.save(card);
                 return new ResponseEntity<>("Account Created",HttpStatus.CREATED);
     }
-//    @GetMapping("/clients/current/cards")
-//    public ResponseEntity<Set<CardDTO>> cardExpired(Authentication authentication){
-//        Client client =  clientService.findByEmail(authentication.getName());
-//        Set<Card> cards = client.getCards();
-//        Set<CardDTO> cardDTOS = cards.stream().map(card -> new CardDTO(card)).filter(cardDTO -> cardDTO.getThruDate().isBefore(LocalDateTime.now())).collect(Collectors.toSet());
-//        return new ResponseEntity<>(cardDTOS, HttpStatus.OK);
-//    }
 
     @GetMapping("/clients/current/cards/active")
     public List<CardDTO> cardsActive (Authentication authentication){

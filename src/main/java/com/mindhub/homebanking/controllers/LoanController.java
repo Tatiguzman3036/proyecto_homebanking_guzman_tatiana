@@ -56,6 +56,9 @@ public class LoanController {
         if (account == null) {
             return new ResponseEntity<>("Account do not exist", HttpStatus.FORBIDDEN);
         }
+        if (!account.getHidden()) {
+            return new ResponseEntity<>("The account is hidden. Unable to request a loan.", HttpStatus.FORBIDDEN);
+        }
         if (loanApplicationDTO.getAmount() <= 9999) {
             return new ResponseEntity<>("The amount is insufficient.", HttpStatus.FORBIDDEN);
         }
@@ -72,7 +75,7 @@ public class LoanController {
             return new ResponseEntity<>("The account does not belong to the client.", HttpStatus.FORBIDDEN);
         }
         Double loanApplicationPercentage = (loanApplicationDTO.getAmount() * loan.getPercentage()) + (loanApplicationDTO.getAmount());
-        ClientLoan clientLoan = new ClientLoan(loanApplicationPercentage, loanApplicationDTO.getPayments());
+        ClientLoan clientLoan = new ClientLoan(loanApplicationPercentage, loanApplicationDTO.getPayments(),loanApplicationDTO.getPayments(),loanApplicationPercentage);
         Transaction transaction = new Transaction(TransactionType.CREDIT, loanApplicationDTO.getAmount(), loan.getName() + ":" + "loan approved", LocalDateTime.now(), account.getBalance() + loanApplicationDTO.getAmount());
         account.setBalance(account.getBalance() + loanApplicationDTO.getAmount());
         account.addTransaction(transaction);

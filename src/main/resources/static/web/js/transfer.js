@@ -14,9 +14,9 @@ const app = createApp({
         }
     },
     created(){
-        axios.get(`http://localhost:8080/api/clients/current`)
+        axios.get(`/api/clients/accounts`)
         .then(res =>{
-            this.account = res.data.accounts
+            this.account = res.data
             this.account.sort((itemA, itemB)=> itemA.id - itemB.id);
             console.log(this.account);
         }).catch(error => console.log(error))
@@ -72,7 +72,7 @@ const app = createApp({
                 accountDestination: this.transferDTO.accountDestination,
                 description: this.transferDTO.description
             };
-            axios.post('http://localhost:8080/api/transactions', transferDTO)
+            axios.post('/api/transactions', transferDTO)
             .then(res =>
               console.log(res),
               Swal.fire({
@@ -80,8 +80,7 @@ const app = createApp({
                 title: 'Transaction OK!',
                 showConfirmButton: false,
                 timer: 1500,
-
-            }),
+              }),
               setTimeout(()=>{
                 window.location.href = "accounts.html"
               },1800) 
@@ -89,8 +88,7 @@ const app = createApp({
                 this.error1 = error.response.data
                 Swal.fire(`${this.error1}`,'error');
                 console.log(error)})
-                }})
-                .catch(err => console.log(err));}
+                }}).catch(err => console.log(err));}
         },
         makeTransfer1() {
           if (this.transferDTO.amount === null && this.transferDTO.accountOrigin.length === 0 && this.transferDTO.accountDestination.length === 0 && this.transferDTO.description.length === 0) {

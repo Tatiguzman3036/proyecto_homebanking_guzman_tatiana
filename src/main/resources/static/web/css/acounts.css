@@ -168,7 +168,11 @@ caption {
     color: white;
     transform: rotateY(180deg);
   }
-
+  @media screen and (max-width: 383px) {
+    .amount {
+      display: none;
+    }
+  }
 @media only screen and(min-width: 320px) {
   #imagensorry{
     display: none !important;

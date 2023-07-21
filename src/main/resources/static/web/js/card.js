@@ -18,8 +18,6 @@ const app = createApp({
         loadData(){
             axios.get("/api/clients/current/cards/active")
             .then(res => {
-                /* this.client = res.data
-                console.log(this.client); */
                 this.card = res.data
                 console.log(this.card);
                 this.creditCard = this.card.filter(card => card.type == "CREDIT").sort((itemA, itemB)=> itemA.id - itemB.id)
@@ -55,8 +53,6 @@ const app = createApp({
             }).catch(error => console.log(error))
         },
         renewTarget(thruDate){
-          /* console.log(thruDate < (new Date().toLocaleDateString().split('/').reverse().join('-')));
-            return thruDate < (new Date().toLocaleDateString().split('/').reverse().join('-')) */
             const currenDate = new Date();
             const formatThruDate = new Date(thruDate);
             return formatThruDate < currenDate
