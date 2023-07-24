@@ -41,7 +41,7 @@ public class AccountController {
         if (!account.getClient().equals(client)){
             return new ResponseEntity<>("The account is inactive", HttpStatus.UNAUTHORIZED);
         }
-        if (!account.getHidden()){
+        if (!account.isActive()){
             return new ResponseEntity<>("The account is hidden", HttpStatus.FORBIDDEN);
         }
         return new ResponseEntity<>(new AccountDTO(account),HttpStatus.OK);
@@ -54,7 +54,7 @@ public class AccountController {
             randomNumber = CardUtils.getRandomNumber();
         }while (accountService.findByNumber(randomNumber) != null);
         Client client = clientService.findByEmail(authentication.getName());
-        if(client.getAccounts().stream().filter(account -> !account.getHidden()).count() > 3){
+        if(client.getAccounts().stream().filter(account -> !account.isActive()).count() > 3){
             return new ResponseEntity<>("Reached maximum number of accounts", HttpStatus.FORBIDDEN);
         }
 
@@ -68,7 +68,7 @@ public class AccountController {
     @GetMapping("/clients/accounts")
     public List<AccountDTO> accountHidden (Authentication authentication){
         Client client =  clientService.findByEmail(authentication.getName());
-        return client.getAccounts().stream().map(account -> new AccountDTO(account)).filter(accountDTO -> accountDTO.getHidden()).collect(Collectors.toList());
+        return client.getAccounts().stream().map(account -> new AccountDTO(account)).filter(accountDTO -> accountDTO.isActive()).collect(Collectors.toList());
     }
     @PatchMapping("/accounts/{id}/hidden")
     public ResponseEntity<Object> deleteAccount(Authentication authentication, @PathVariable Long id){
@@ -86,7 +86,7 @@ public class AccountController {
             return new ResponseEntity<>("Client no exist", HttpStatus.UNAUTHORIZED);
         }
         Account account = accountService.findById(id);
-//        List<Transaction> transactionList = account.getTransactions().stream().filter(transaction -> transaction.getAccount().getHidden()).collect(Collectors.toList());
+
         if (account == null){
             return new ResponseEntity<>("Account is not exist", HttpStatus.FORBIDDEN);
         }
@@ -99,10 +99,7 @@ public class AccountController {
         if (account.getBalance() != 0) {
             return new ResponseEntity<>("Cannot delete account with non-zero balance", HttpStatus.FORBIDDEN);
         }
-//        for (Transaction transaction : transactionList ){
-//            transaction.getAccount().getHidden(false);
-//        }
-        account.setHidden(false);
+        account.setActive(false);
         accountService.save(account);
         return new ResponseEntity<>("Account deactivated successfully", HttpStatus.OK);
     }

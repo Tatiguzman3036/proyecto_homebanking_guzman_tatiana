@@ -12,7 +12,7 @@ public class AccountDTO {
     private String number;
     private LocalDate creationDate;
     private double balance;
-    private boolean hidden;
+    private boolean active;
     private AccountType accountType;
 
     private Set<TransactionDTO> transaction;
@@ -27,7 +27,7 @@ public class AccountDTO {
 
         this.balance = account.getBalance();
 
-        this.hidden = account.getHidden();
+        this.active = account.isActive();
 
         this.accountType = account.getAccountType();
 
@@ -44,8 +44,8 @@ public class AccountDTO {
         return id;
     }
 
-    public boolean getHidden() {
-        return hidden;
+    public boolean isActive() {
+        return active;
     }
 
     public String getNumber() {

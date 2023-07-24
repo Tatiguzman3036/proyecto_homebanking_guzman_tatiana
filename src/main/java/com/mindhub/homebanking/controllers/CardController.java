@@ -29,17 +29,15 @@ public class CardController {
     public ResponseEntity<Object> createCard(@RequestParam CardType type, @RequestParam ColorType color, Authentication authentication) {
 
         Client client = clientService.findByEmail(authentication.getName());
-//        long cardLimit = ;
         // Verifico si el cliente ya tiene 3 tarjetas del mismo tipo
-        if (client.getCards().stream().filter(card -> card.getType() == type).count() >= 3) {
+        if (client.getCards().stream().filter(card -> card.getType() == type & card.getStatus()).count() >= 3) {
             return new ResponseEntity<>("Exceeded maximum number of cards", HttpStatus.FORBIDDEN);
         }
         //verifico si ya existe la tarjeta x tipo y color y estado
-//        boolean cardExist = ;
         if (client.getCards().stream().anyMatch(card -> card.getType() == type && card.getColor() == color && card.getStatus())){
             return new ResponseEntity<>("A card already exists", HttpStatus.FORBIDDEN);
         }
-            // Generar número de tarjeta único
+            // Genero número de tarjeta único
             String cardNumber = " ";
             Random random = new Random();
         int cvv = CardUtils.getCvv(random);

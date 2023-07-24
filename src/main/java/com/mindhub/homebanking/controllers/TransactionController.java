@@ -108,7 +108,7 @@ public class TransactionController {
             return new ResponseEntity<>("Invalid CVV", HttpStatus.FORBIDDEN);
         }
         Client client = card.getClient();
-        Set<Account> accounts = client.getAccounts().stream().filter(account1 -> account1.getHidden()).collect(Collectors.toSet());
+        Set<Account> accounts = client.getAccounts().stream().filter(account1 -> account1.isActive()).collect(Collectors.toSet());
         Account account = accounts.stream().filter(account1 -> account1.getBalance() >= paymentsDTO.getAmount()).findFirst().orElse(null);
         if (card == null){
             return new ResponseEntity<>("Card is not exist",HttpStatus.FORBIDDEN);

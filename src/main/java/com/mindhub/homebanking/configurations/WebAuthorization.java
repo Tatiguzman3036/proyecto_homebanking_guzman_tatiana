@@ -32,7 +32,7 @@ class WebAuthorization extends GlobalAuthenticationConfigurerAdapter implements 
                 .antMatchers("/web/manager.html", "/rest/**","/h2-console/**").hasAuthority("ADMIN")
                 .antMatchers(HttpMethod.POST,"/api/loans/createdLoans").hasAuthority("ADMIN")
                 .antMatchers("/api/loans","/api/clients/current/accounts","/api/clients/accounts").hasAuthority("CLIENT")
-                .antMatchers("/web/pages/account.html","/web/pages/accounts.html","/web/pages/card.html","/web/pages/accounts2.html"
+                .antMatchers("/web/pages/account.html","/web/pages/accounts.html","/web/pages/card.html","/web/pages/client-loan-aplication.html"
                         ,"/web/pages/transfer.html","/web/pages/loan-application.html","/web/pages/createdCard.html").hasAuthority("CLIENT");
 //                .anyRequest().denyAll();
 
@@ -88,10 +88,10 @@ class WebAuthorization extends GlobalAuthenticationConfigurerAdapter implements 
     }
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/api/**")
-                .allowedOrigins("http://127.0.0.1:5500") // Reemplaza la URL con la del front-end
-                .allowedMethods("GET", "POST", "PUT", "DELETE")
-                .allowedHeaders("*");
+        registry.addMapping("/api/**") //todas las solicitudes que se realizen a URLs que comienzen con /api/
+                .allowedOrigins("http://127.0.0.1:5500") // permitimos solicitudes del front alojado en este puerto que comienzen con api
+                .allowedMethods("GET", "POST", "PUT", "DELETE") //los tipos de solicitudes pueden acceder a laruta api desd el front
+                .allowedHeaders("*"); // se usa para verificar autenticacion y evitar ataques crsf y otros, son medidas de seguridad o cabeceras
     }
 
 }

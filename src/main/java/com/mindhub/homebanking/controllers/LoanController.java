@@ -56,7 +56,7 @@ public class LoanController {
         if (account == null) {
             return new ResponseEntity<>("Account do not exist", HttpStatus.FORBIDDEN);
         }
-        if (!account.getHidden()) {
+        if (!account.isActive()) {
             return new ResponseEntity<>("The account is hidden. Unable to request a loan.", HttpStatus.FORBIDDEN);
         }
         if (loanApplicationDTO.getAmount() <= 9999) {
