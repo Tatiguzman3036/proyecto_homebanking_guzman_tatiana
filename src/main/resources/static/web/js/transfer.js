@@ -86,7 +86,7 @@ const app = createApp({
               },1800) 
               ).catch(error =>{
                 this.error1 = error.response.data
-                Swal.fire(`${this.error1}`,'error');
+                Swal.fire(`${this.error1}`);
                 console.log(error)})
                 }}).catch(err => console.log(err));}
         },
@@ -146,12 +146,12 @@ const app = createApp({
                         window.location.href = "accounts.html"
                       },1800)
                     }
-                    }).catch(error =>{
-                      this.error1 = error.response.data
-                  Swal.fire(
-                    `${this.error1}`);
-                    
-                  console.log(error)})
+                    }).catch(error => {
+                      this.error1 = err.response.data
+                  Swal.fire({
+                      icon:'error',
+                      title: `${this.error1}`});
+                  console.log(err)})
                     
                   }})
                   .catch(err => console.log(err));

@@ -64,11 +64,11 @@
                 <td class="text-danger" v-if="account.type == `DEBIT`" ><strong>{{account.type}}</strong> </td>
                 <td class="text-success" v-else><strong>{{account.type}}</strong> </td>
                 <td >{{account.description}} </td>
-                <td class="text-danger" v-if="account.type == `DEBIT`" ><strong>${{(account.amount).toFixed(2)}}</strong> </td>
-                <td class="text-success" v-else><strong>${{account.amount}}</strong> </td>
+                <td class="text-danger" v-if="account.type == `DEBIT`" ><strong>${{amount(account.amount)}}</strong> </td>
+                <td class="text-success" v-else><strong>${{amount(account.amount)}}</strong> </td>
                 <td>{{account.date.slice(0,10)}} </td>
                 <td class="time">{{account.date.slice(11,19)}} </td>
-                <td class="balance">${{(account.currentBalance).toFixed(2)}}</td>
+                <td class="balance">$ {{amount(account.currentBalance)}}</td>
               </tr>
             </tbody>
           </table>

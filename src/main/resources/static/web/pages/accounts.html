@@ -52,11 +52,11 @@
       <h3 class="d-flex flex-column align-items-center m-2 text-white ya">Welcome {{client.firstName}} {{client.lastName}}!</h3>
     </section>
     <div   v-if="account.length < 3">
-      <div class="m-2 d-flex justify-content-end">
-        <button class="buttonCreatedAccount" @click="createAccount()">Created Account</button>
-      </div>
       <div>
         <h3 class="d-flex justify-content-center align-items-center ya m-2 text-white">Your Accounts:</h3>
+      </div>
+      <div class="m-2 d-flex justify-content-end">
+        <button class="buttonCreatedAccount" @click="createAccount()">Created Account</button>
       </div>
     </div>
     <div  v-else>
@@ -78,7 +78,7 @@
                   <h5>Type Account: {{accounts.accountType}}</h5>
                   <h5 class="card-subtitle">Creation Date: </h5>
                   <p>{{accounts.creationDate}}</p>
-                  <h5 class="card-subtitle">Balance: ${{accounts.balance.toFixed(2)}}</h5>
+                  <h5 class="card-subtitle">Balance: ${{amount(accounts.balance)}}</h5>
                 </div>
                 <a v-bind:href="'./account.html?id=' + accounts.id" class="text-center buttom text-decoration-none">See Details</a>
               </div>
@@ -90,15 +90,15 @@
         </div>
       </div>
     </div>
+    <h3 class=" ya m-2 text-white text-center">Here you have all your loans:</h3>
     <div class=" d-flex justify-content-end" >
       <a href="./loan-application.html" type="submit" class="text-decoration-none text-center createdCardsbutton">Apply</a>
      </div>
-     <div class="mt-2 mb-0 d-flex justify-content-end" >
+     <div v-if="loan !=0" class="mt-2 mb-0 d-flex justify-content-end" >
       <a href="./client-loan-aplication.html" type="submit" class="text-decoration-none text-center bg bg-danger createdCardsbutton">Make a payment</a>
      </div>
     <div v-if="loan !=0" class="pt-3 d-flex justify-content-center">
       <table >
-        <caption class=" ya m-2 text-white">Here you have all your loans:</caption>
         <thead>
           <tr>
             <th>Loan name</th>
@@ -112,9 +112,9 @@
           <tr  v-if="loans.restAmount > 0">
             <td>{{loans.name}} </td>
             <td>{{loans.loanPayments}} out of {{loans.payments}}  </td>
-            <td>${{loans.amount}} </td>
-            <td class="amount">${{(loans.amount / loans.payments).toFixed(2)}} </td>
-            <td>${{(loans.restAmount).toFixed(2) }} </td>
+            <td>${{amount(loans.amount)}} </td>
+            <td class="amount">${{paymentAmount(loans.amount , loans.payments)}} </td>
+            <td>${{amount(loans.restAmount) }} </td>
           </tr>
         </tbody>
       </table>
@@ -130,19 +130,19 @@
         <h5 class="text-white">Follow us on our accounts:</h5>
         <li>
           <a class="d-flex align-items-center m-1" target="_blank" href="https://es-la.facebook.com/">
-            <img class=" icono shadow bg bg-white rounded-2 " src="../images/fb.png" alt="Logo de Facebook">
+            <img class=" icono shadow " src="../images/fb.png" alt="Logo de Facebook">
             <p class="text-white m-0 text-decoration-none">|La Guzmi Fb</p>
           </a>
         </li>
         <li>
           <a class="d-flex align-items-center m-1" target="_blank"  href="https://ar.linkedin.com/?original_referer=https%3A%2F%2Fwww.google.com%2F">
-            <img class=" icono2 bg bg-white rounded-2 " src="../images/in.png" alt="Lode de wpp">
+            <img class=" icono2 " src="../images/in.png" alt="Lode de wpp">
             <p class="text-white m-0 text-decoration-none">|LaGuzmiLinkedin</p>
           </a>
         </li>
         <li>
           <a class="d-flex align-items-center m-1" target="_blank" href="https://www.instagram.com/">
-            <img class=" icono2 bg bg-white rounded-2 " src="../images/instagram.png" alt="Lode de ig">
+            <img class=" icono3 " src="../images/instagram.png" alt="Lode de ig">
             <p class="text-white m-0 text-decoration-none">|La Guzmi Ig</p>
           </a>
         </li>

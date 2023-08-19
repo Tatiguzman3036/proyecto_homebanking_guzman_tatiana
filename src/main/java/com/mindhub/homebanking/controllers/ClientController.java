@@ -16,6 +16,8 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Random;
 
+import static com.mindhub.homebanking.utils.CardUtils.getRandomNumber;
+
 @RestController @RequestMapping("/api")
 public class ClientController {
     @Autowired
@@ -59,8 +61,7 @@ public class ClientController {
         //agregar la cuenta cuando se cree el cliente
         String randomNumber;
         do {
-            Random random = new Random();
-            randomNumber = "VIN-" + random.nextInt(99999999) + 10000000;
+            randomNumber = getRandomNumber();
         }while (accountService.findByNumber(randomNumber) != null);
         Account account = new Account(randomNumber, LocalDate.now(), 0.0,true, AccountType.SAVINGS);
         account.setClient(client);

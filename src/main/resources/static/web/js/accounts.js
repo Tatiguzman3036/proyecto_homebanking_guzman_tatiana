@@ -11,7 +11,8 @@ const app = createApp({
             id:"",
             accountDTO:{
                 accountType: ""
-            }
+            },
+            error1: ""
         }
     },
     created(){
@@ -27,8 +28,18 @@ const app = createApp({
                 this.loan= res.data.loans
                 this.loan.sort((itemA,itemB) => itemA.id - itemB.id)
                 console.log(this.loan);
+              
             })
             .catch(error => console.log(error))
+        },
+        paymentAmount(amount, payments){
+          let resultado = amount / payments;
+          let format = parseFloat(resultado.toFixed(2))
+          return format.toLocaleString()
+        },
+        amount(monto){
+          let amount = parseFloat(monto.toFixed(2))
+          return amount.toLocaleString()
         },
         loadData1(){
             axios.get("/api/clients/accounts")
@@ -68,10 +79,12 @@ const app = createApp({
                         window.location.href = "accounts.html"
                       },1800)
                   })
-                  .catch(err => {
-                    console.log(err);
-                    Swal.fire('Error creating account', '', 'error');
-                  });
+                  .catch(err =>  {
+                    this.error1 = err.response.data
+                Swal.fire({
+                    icon:'error',
+                    title: `${this.error1}`});
+                console.log(err)});
               }
             });
           },
@@ -87,18 +100,32 @@ const app = createApp({
             }
             
         },
-        deleteAccount(id){
-            this.id = id
-            axios.patch(`/api/accounts/${this.id}/hidden`)
-              .then(response => {
-                console.log(response.data);
-                location.reload()
-                this.account.filter(account => account.id !== id);
-              })
-              .catch(error => {
-                console.error(error.response.data)
-            });
-        },
+        deleteAccount(id) {
+          Swal.fire({
+              title: 'Are you sure?',
+              text: 'Once deleted, you will not be able to recover this account!',
+              icon: 'warning',
+              showCancelButton: true,
+              confirmButtonText: 'Yes, delete it!',
+              cancelButtonText: 'Cancel'
+          }).then((result) => {
+              if (result.isConfirmed) {
+                  this.id = id;
+                  axios.patch(`/api/accounts/${this.id}/hidden`)
+                      .then(response => {
+                          console.log(response.data);
+                          location.reload();
+                          this.account = this.account.filter(account => account.id !== id);
+                      })
+                      .catch(err =>   {
+                        this.error1 = err.response.data
+                    Swal.fire({
+                        icon:'error',
+                        title: `${this.error1}`});
+                    console.log(err)});
+              }
+          });
+      },
         signOut(){
             axios.post('/api/logout')
             .then(response => {

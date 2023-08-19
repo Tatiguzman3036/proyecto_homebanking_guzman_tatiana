@@ -8,7 +8,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -42,7 +41,7 @@ public class  HomebankingApplication {
 			Transaction transaction04 = new Transaction(TransactionType.DEBIT, -1500.00,"Suship", LocalDateTime.now(),200.0);
 
 			List<Integer> mortgageList = List.of(12,24,36,48,60);
-			Loan mortgage = new Loan("Mortgage", 50000.0, mortgageList, 0.20);
+			Loan mortgage = new Loan("Mortgage", 500000.0, mortgageList, 0.20);
 			List<Integer> personalList = List.of(6,12,24);
 			Loan personal = new Loan("Personal", 100000.0,personalList,0.30);
 			List<Integer> automotiveList = List.of(6,12,24,36);

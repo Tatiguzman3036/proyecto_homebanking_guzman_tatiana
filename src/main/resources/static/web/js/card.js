@@ -9,6 +9,7 @@ const app = createApp({
             debitCard: [],
             id: null,
             number: "",
+            error1:""
         }
     },
     created(){
@@ -89,13 +90,11 @@ const app = createApp({
                     });
                   })
                   .catch((error) => {
-                    Swal.fire({
-                      title: 'Error!',
-                      text: 'An error occurred while deleting the card.',
-                      icon: 'error',
-                    });
-                    console.error('Error al eliminar la tarjeta:', error.message);
-                  });
+                    this.error1 = err.response.data
+                Swal.fire({
+                    icon:'error',
+                    title: `${this.error1}`});
+                console.log(err)});
               }
             });
           },

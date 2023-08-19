@@ -28,16 +28,22 @@ footer {
     background-color: #0f3c69!important;
   }
   .icono{
-    width: 5vw !important;
-    height: 5vh !important;
+    width: 3.5vw !important;
+    height: 6vh !important;
+    margin: 1rem !important;
+    margin-bottom: 0rem !important;
 }
 .icono2{
-  width: 5vw !important;
-    height: 5vh !important;
+  width: 6vw !important;
+  height: 8vh !important;
+}
+.icono3{
+  width: 6vw !important;
+  height: 7vh !important;
 }
 .imagennavbar {
     height: 15vh !important;
-    width: 10vw !important;
+    width: 15vw !important;
 }
 .imagenprincipal{
     width: 90vw !important;
